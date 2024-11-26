@@ -344,19 +344,21 @@
                             <!-- END HERO -->
                             <tr>
                                 <td align="left" style="padding: 30px 30px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
-                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Hi {{ Profile.firstName | default:"trader" }}!</p>
+                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Hi {{user.first_name}}!</p>
                                 </td>
                             </tr>
                             <tr>
                                 <td align="left" style="padding: 8px 30px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
-                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">There’s still more to learn in your trading course. {% if enrollments %}</p>
+                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">There’s still more to learn in your trading {{site_name}} course.</p>
                                 </td>
                             </tr>
+                            {% if enrollments %}
                             <tr>
                                 <td align="left" style="padding: 8px 30px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
-                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Complete it and keep progressing! {{ enrollment.course_name }} is {{enrollment.percentage_completed}} complete. {% endif %}</p>
+                                    <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Complete it and keep progressing! {{ enrollment.course_name }} is {{enrollment.percentage_completed}} complete. </p>
                                 </td>
                             </tr>
+                            {% endif %}
                             <tr>
                                 <td align="left" style="padding: 8px 30px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
                                     <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Each lesson offers a step towards improving your trading strategies.</p>
