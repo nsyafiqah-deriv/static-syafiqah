@@ -33,35 +33,6 @@ body, table, td, a {             -webkit-text-size-adjust: 100%;             -ms
 @media screen and (max-width: 620px) {             
     .img-max {                 width: 100% !important;                 max-width: 100% !important;                 height: auto !important;             }             .max-width {                 max-width: 100% !important;             }             .mobile-wrapper {                 width: 100% !important;                 max-width: 100% !important;             }             .mb-lowwidth{                 width: 70px !important;              }             .mobile-visible {                 display:inline-block !important;             }             .mobile-hide {                 display:none !important;             }             .mobile-nopadding {                 padding: 0 !important;             }             .mobile-side {                 padding-right: 15px !important;                 padding-left: 15px !important;             }             .mobile-side2 {                 padding-right: 25px !important;                 padding-left: 25px !important;             }             .mobile-side3 {                 padding-right: 5px !important;                 padding-left: 5px !important;             }             .mobile-negmargin {                 margin-top: -15px !important;             }             .mobile-center {                 text-align:center !important;             }             .mobile-unvisible {                 display: none!important;             }              .mobile-bgcolor-gray {                 background-color: #eeeeee !important;             }             .mb-bg-lightgray{                 background-color: #f5f7fa !important;              }             .mb-padding-top{                 padding-top: 15px !important;             }             .mobile-visible-block {                 display: block !important;             }             .mobile-low-top-padding {                 padding-top: 1px !important;             }             .mb-font-size{                 font-size: 24px !important;             }         }         @media (prefers-color-scheme: dark ) {             /* Shows Dark Mode-Only Content, Like Images */                          .dark-img { display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }             .dark-imglow { display:block !important; width: 100px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }                  /* Hides Light Mode-Only Content, Like Images */             .light-img { display:none; display:none !important; }              /* Custom Dark Mode Background Color */             .darkmodeblack { background-color:#0e0e0e !important; }             .darkmodelowblack { background-color: #202020 !important; }              /* Custom Dark Mode Font Colors */             h1, h2, p, span, a, b { color: #ffffff !important; }             .darkmodegray { color: #6e6e6e !important; }             .darkcolor-subtext{ color: #c2c2c2 !important; }             .darkcolor-subtext1{ color: #737272 !important; }             .darkcolor-white{ color: #ffffff !important; }             .darkborder{ border-color: #6e6e6e !important; }              /* Custom Dark Mode Text Link Color */             .link { color: #91ADD4 !important; }         }          /* Shows Dark Mode-Only Content, Like Images */         [data-ogsc] .dark-img { display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }         [data-ogsc] .dark-imglow { display:block !important; width: 100px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }                  /* Hides Light Mode-Only Content, Like Images */         [data-ogsc] .light-img { display:none; display:none !important; }          /* Custom Dark Mode Background Color */         [data-ogsc] .darkmodeblack { background-color: #0e0e0e !important;}         [data-ogsc] .darkmodelowblack { background-color: #202020 !important; }          /* Custom Dark Mode Font Colors */         [data-ogsc] h1, [data-ogsc] h2, [data-ogsc] p, [data-ogsc] span, [data-ogsc] a, [data-ogsc] b { color: #ffffff !important; }         [data-ogsc] .darkmodegray { color: #6e6e6e !important; }         [data-ogsc] .darkcolor-subtext{ color: #c2c2c2 !important; }         [data-ogsc] .darkcolor-subtext1{ color: #737272 !important; }         [data-ogsc] .darkcolor-white{ color: #ffffff !important; }         [data-ogsc] .darkborder{ border-color: #6e6e6e !important; }          /* Custom Dark Mode Text Link Color */         [data-ogsc] .link { color: #91ADD4 !important; }          @media (prefers-color-scheme: dark ) and (max-width: 620px)  {             .dark-lowwidth-m{ display:block !important;width: 70px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important;}             [data-ogsc].dark-lowwidth-m{ display:block !important;width: 70px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }         }
 
-    /* Portrait mode */
-  @media screen and (max-width: 620px) and (orientation: portrait) {
-    .text-small {
-      font-size: 14px;
-    }
-
-    .text-medium {
-      font-size: 15px;
-    }
-
-    .text-large {
-      font-size: 16px;
-    }
-  }
-
-  /* Landscape mode */
-  @media screen and (max-width: 620px) and (orientation: landscape) {
-    .text-small {
-      font-size: 14px;
-    }
-
-    .text-medium {
-      font-size: 15px;
-    }
-
-    .text-large {
-      font-size: 16px;
-    }
-  }
  </style>
 </head>
 <body data-gr-ext-installed="" data-new-gr-c-s-check-loaded="14.1216.0" style="background-color: rgb(238, 238, 238); margin: 0px !important; padding: 0px !important; cursor: auto; font-family:Arial,'Helvetica Neue',Helvetica,sans-serif;">
@@ -121,7 +92,7 @@ body, table, td, a {             -webkit-text-size-adjust: 100%;             -ms
              <tbody>
                <tr>
                  <td align="left" class="mobile-side darkmodelowblack" colspan="3" style="padding: 20px 15px 10px; background-color: #f2f3f4;">
-                 <p class="darkcolor-subtext" style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: clamp(14px, 3vw, 16px); line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;">Support your clients’ success by introducing them to <a href="https://academy.deriv.com/" style="color: #ff444f !important;">Deriv Academy</a>, our free trading education platform.</p>
+                 <p class="darkcolor-subtext" style="font-family: 'IBM Plex Sans', Arial, sans-serif; font-size: clamp(14px, 3vw, 16px); line-height: 1.5 ; color: #414652; font-weight: 400;margin:0;">Support your clients’ success by introducing them to <a href="https://academy.deriv.com/" style="color: #ff444f !important; font-size: 16px !important;">Deriv Academy</a>, our free trading education platform.</p>
                  </td>
                </tr>
                <tr>
