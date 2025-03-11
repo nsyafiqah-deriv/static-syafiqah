@@ -382,7 +382,7 @@
                             <!-- END HERO -->
                             <tr>
                                 <td align="left" style="padding: 20px 45px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
-                                    <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 24px; color: #181C25; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">{% if customer.firstName != blank %} Hi {{customer.firstName | titlecase }}, {% else %} Hello trader, {% endif %}</p>
+                                    <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 24px; color: #181C25; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">Hi {{ Profile.firstName | default:"trader" }},</p>
                                 </td>
                             </tr>
                             <tr>
