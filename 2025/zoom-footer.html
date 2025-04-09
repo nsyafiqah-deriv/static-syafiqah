@@ -1,0 +1,82 @@
+<#setting url_escaping_charset='UTF-8'>
+<#function replaceInvalidChar name><#if name??><#return (name!"")?html?replace(".", "<span>.</span>")?replace(":", "<span>:</span>")><#else><#return ""></#if></#function>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <#--this meta info can't be removed for branding-->
+    <meta name="description" content="ZOOM-WEBINAR-TEMPLATE-V2"/>
+    <meta name="templateVersions" content="V2"/>
+</head>
+<body style="height: 100% !important;width: 100% !important;margin: 0;padding: 0;">
+<table border="0" cellpadding="0" cellspacing="0" align="center" bgcolor="#F1F1F4" width="100%" style="font-size: 13px;font-family: Arial;height:100%;">
+    <tr>
+        <td>
+            <table id="table-new-invitation" border="0" cellpadding="0" cellspacing="0" align="center" style="padding: 40px 0;max-width: 960px;min-width: 600px;width: 60%;">
+                <#if logoUrl?? && logoUrl?length gt 0>
+                    <tr>
+                        <td colspan="2" align="center" height="50" style="height: 50px;">
+                            <img src="${logoUrl}" height="50" style="display:block;max-height:50px;padding-top: 22px;padding-bottom: 16px;" border="0"/>
+                        </td>
+                    </tr>
+                <#else>
+                    <tr>
+                        <td style="height: 8px;"></td>
+                    </tr>
+                </#if>
+                <tr>
+                    <td valign="top" bgcolor="#FFFFFF" style="border-radius: 8px;border: solid 1px #fff;">
+                        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="margin-left: 0;margin-right: 0;">
+                            <tr>
+                                <td style="padding-left: 32px;padding-right: 32px;">
+                                    <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="font-size: 13px;color: #39394D;font-family: Arial;">
+                                        <#if bannerUrl?? && bannerUrl?length gt 0>
+                                            <tr>
+                                                <td colspan="2" align="center" style="padding-top: 32px;">
+                                                    <img src="${bannerUrl}" style="display:block;width: 100%;max-width: 100%;max-height: 320px;border:1px solid #fff;border-radius: 8px;" border="0"/>
+                                                </td>
+                                            </tr>
+                                        </#if>
+                                        <tr>
+                                            <td colspan="2" valign="top" style="padding-top:32px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;">
+                                                Hi ${replaceInvalidChar(userName)},<br/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding: 28px 0;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;" valign="top">
+                                                Thank you for attending ${topic?html} webinar. We hope you enjoyed the webinar.<br>
+                                                <br>
+                                                It was a pleasure having you join us and contributing to the insightful discussions. Your presence contributed significantly to the success of the webinar.<br>
+                                                <br>
+                                                For any queries regarding the webinar content, materials discussed, or anything else related to the topic, please submit your questions or comments to: ${hostEmail}.<br>
+                                            </td>
+                                        </tr>
+                                        <#if (customTextHeader!"") != "">
+                                            <tr>
+                                                <td colspan="2" style="padding-bottom:28px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;" valign="top">
+                                                    ${(customTextHeader!"")?html?replace("\n","<br>")}
+                                                </td>
+                                            </tr>
+                                        </#if>
+                                        <tr>
+                                            <td colspan="2" style="padding-bottom:28px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;" valign="top">
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td height="8"></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr><td style="height: 16px"></td></tr>
+                <tr><td style="padding-top: 24px;padding-bottom: 24px;"><table align="center" border="0" cellpadding="0" cellspacing="0" style="width:auto;"><tbody><tr><td style="padding:0;"><a href="https://twitter.com/zoom" class="no-decortaion" style="margin-right: 16px;"><img alt="" border="0" width="32" height="32" src="${imageNewFolder}/twitter.png" style="border-width: 0px;border-style: solid;"/></a></td><td style="padding:0;"><a href="https://www.linkedin.com/company/zoom-video-communications/" style="text-decoration: none;margin-right: 16px;"><img alt="" border="0" width="32" height="32" src="${imageNewFolder}/linkedin.png" style="border-width: 0px;border-style: solid;"/></a></td><td style="padding:0;"><a href="https://blog.zoom.us/" style="text-decoration: none;"><img alt="" border="0" width="32" height="32" src="${imageNewFolder}/zoomblog.png" style="border-width: 0px;border-style: solid;"/></a></td></tr></tbody></table><table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin-top: 16px;color:#6E7680;font-size: 12px;line-height: 16px;font-weight: 400;"><tbody><tr><td align="center" style="font-family:helvetica,arial;font-size:12px;font-weight: 400;line-height:16px;color:#747487;" valign="top"><a href="tel:1-888-799-9666" style="text-decoration: none;color: #6E7680;">+1.888.799.9666</a><p style="margin:0;font-size: 12px;">Copyright &copy;${.now?string.yyyy} Zoom Video                                        Communications, Inc.</p></td></tr><tr><td align="center" style="padding: 16px 0 0;font-family:helvetica,arial;font-size:12px;font-weight: 400;line-height:16px;color:#747487;" valign="top"><a href="http://zoom.us" style="color:#6E7680;text-decoration: none;"                                       target="_blank">Visit Zoom.us</a><br><a href="https://www.google.com/maps/place/55+Almaden+Blvd,+San+Jose,+CA+95113/@37.3328541,-121.897097,17z/data=!3m1!4b1!4m5!3m4!1s0x808fcca40adf3cb7:0x5a2d33d3593e0a33!8m2!3d37.3328541!4d-121.8949083"                                       style="color:#6E7680; text-decoration: none;" target="_blank">55 Almaden Blvd<br>                                        San Jose, CA 95113</a></td></tr></tbody></table></td></tr><tr><td class="zoom-logo" align="center" valign="top"><a href="https://zoom.us" style="padding: 0 !important;"><img src="${imageNewFolder}/ZoomLogo4.png" style="border-style: solid;" width="105" height="24" border="0"/></a></td></tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
