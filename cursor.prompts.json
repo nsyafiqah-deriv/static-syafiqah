@@ -7,19 +7,12 @@
       "description": "Generate a translated copy of an existing email template",
       "prompt": "Translate the HTML email in 'trading-hours-adjustment-eu-es.html' into French, keeping the layout and formatting the same. Only update text content."
     },
-    "component:reactButton": {
-      "description": "Generate a custom React Button component following our design system",
-      "prompt": "Create a reusable React Button component using Tailwind CSS. Props should allow color variants (primary, secondary), disabled state, and a loading spinner. Follow the pattern used in 'components/ui/Button.tsx'."
-    },
-    "apiClient:resourceFetcher": {
-      "description": "Generate a typed API fetch function with error handling",
-      "prompt": "Create a TypeScript fetch function to retrieve project data from '/api/projects'. Use types from 'types/api.ts' and include error handling with 'handleApiError'."
-    },
-    "utils:dateFormatter": {
-      "description": "Generate a standard date formatter for localized emails",
-      "prompt": "Write a TypeScript utility function to format a date into 'Monday, June 24 – 2:00 PM EST'. Localize the output based on a given timezone and language."
-    },
-    "emailTemplate:": {
-      "description": "Generate a US-market version of the trading hours email template",
-      "prompt": "Generate a new HTML email using the layout and style of 'trading-hours-adjustment-eu-es.html'. Update the headline to 'Trading Schedule Notice – US Markets', switch times to EST, and change language to English."
+    "emailTemplate:weeklyEconomicCalendar": {
+      "description": "Generate a weekly economic calendar email template",
+      "prompt": "Generate a new HTML email using the layout and style of 'weeklyeconomicupdate_new.html'. Update the Economic events to the dates and times specified. As below: 31st March 2025, the day of the date economic events: <ul><li>china manufacturing</li><li>china services</li></ul> 1st April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 2nd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 3rd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 4th April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> and update the Assets that may be affected as below; China 50 China H Shares Hong Kong 50 USDCNH Australia 200"
+  },
+  "emailTemplate:weeklyEconomicCalendar_withScreenshot": {
+      "description": "Generate a weekly economic calendar email template and replace the data inside the table with the data from the screenshot",
+      "prompt": "Generate a new HTML email using the same layout and style of 'weeklyeconomicupdate_new.html'. Refer to the screenshot, please replace the values inside the table with the values in the screenshotted images. Ignore time (GMT-UTC) column. please use the same layout and style of weeklyeconomicupdate_new.html"
   }
+}
