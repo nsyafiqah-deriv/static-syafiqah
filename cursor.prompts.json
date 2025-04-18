@@ -11,8 +11,8 @@
       "description": "Generate a weekly economic calendar email template",
       "prompt": "Generate a new HTML email using the layout and style of 'weeklyeconomicupdate_new.html'. Update the Economic events to the dates and times specified. As below: 31st March 2025, the day of the date economic events: <ul><li>china manufacturing</li><li>china services</li></ul> 1st April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 2nd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 3rd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 4th April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> and update the Assets that may be affected as below; China 50 China H Shares Hong Kong 50 USDCNH Australia 200"
     },
-  "emailTemplate:weeklyEconomicCalendar_withScreenshot": {
-      "description": "Generate a weekly economic calendar email template and replace the data inside the table with the data from the screenshot",
-      "prompt": "Generate a new HTML email using the same layout and style of 'weeklyeconomicupdate_new.html'. Refer to the screenshot, please replace the values inside the table with the values in the screenshotted images. Ignore time (GMT-UTC) column. please use the same layout and style of weeklyeconomicupdate_new.html"
+  "emailTemplate:weeklyEconomicCalendar_forAnyLanguage": {
+      "description": "Replace the data inside the table with the data from the screenshot",
+      "prompt": "Refer to the screenshot, please replace the values inside the table with the values in the screenshotted images. Ignore time (GMT-UTC) column."
   }
 }
