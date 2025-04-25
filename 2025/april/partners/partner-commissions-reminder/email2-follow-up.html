@@ -216,6 +216,11 @@
 >
   Create a real account to complete the commission payout
 </h1><p
+class="darkcolor-subtext p16"
+style="font-family: Inter, Arial, sans-serif;text-align: left;font-size: 16px;line-height: 24px;padding: 0 48px;word-wrap: break-word; white-space: normal; word-break: break-word; max-width: 100%; overflow-wrap: anywhere;"
+>
+{% if customer.firstName != blank %} Hi {{customer.firstName | titlecase }}, {% else %} Hello partner, {% endif %}
+</p><p
   class="darkcolor-subtext p16"
   style="font-family: Inter, Arial, sans-serif;text-align: left;font-size: 16px;line-height: 24px;padding: 0 48px;word-wrap: break-word; white-space: normal; word-break: break-word; max-width: 100%; overflow-wrap: anywhere;"
 >
