@@ -1,0 +1,471 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<#setting url_escaping_charset='UTF-8'>
+<#function replaceInvalidChar name>
+    <#if name??>
+        <#return (name!"")?html?replace(".", "<span>.</span>")?replace(":", "<span>:</span>")>
+    <#else>
+        <#return "">
+    </#if>
+</#function>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
+    <#--this meta info can't be removed for branding-->
+    <meta name="description" content="ZOOM-WEBINAR-TEMPLATE-V2"/>
+</head>
+<body style="height: 100% !important;width: 100% !important;margin: 0;padding: 0;">
+<table id="table-new-invitation" border="0" cellpadding="0" cellspacing="0" align="center" style="padding: 40px 0;max-width: 960px;min-width: 600px;width: 60%;">
+    <#if logoUrl?? && logoUrl?length gt 0>
+        <tr>
+            <td colspan="2" align="center" height="50" style="height: 50px;">
+                <img src="${logoUrl}" height="50" style="display:block;max-height:50px;padding-top: 22px;padding-bottom: 16px;" border="0"/>
+            </td>
+        </tr>
+    <#else>
+        <tr><td style="height: 8px;"></td> </tr>
+    </#if>
+    <tr>
+        <td valign="top" bgcolor="#ffffff">
+            <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="margin-left: 0;margin-right: 0;">
+                <tr>
+                    <td style="padding-left: 32px;padding-right: 32px;">
+                        <table border="0" cellpadding="0" cellspacing="0" align="center" width="100%" style="font-size: 13px;color: #39394d;font-family: Arial;">
+                            <#if bannerUrl?? && bannerUrl?length gt 0>
+                                <tr>
+                                    <td colspan="2" align="center" width="544" style="width:544px;">
+                                        <img src="${bannerUrl}" style="display:block;max-width: 544px;max-height: 258px;padding-top: 32px;" border="0"/>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <tr>
+                                <td colspan="2" valign="top" style="padding-top:32px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;">Hi ${replaceInvalidChar(userName)},</td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" valign="top" style="padding-bottom: 28px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;">
+                                    This is a reminder that your webinar will begin in ${reminderTime}:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td width="100%">
+                                    <table style="width:100%;border-radius: 8px;background-color: #F7F7FC;">
+                                        <#if topic??>
+                                            <tr>
+                                                <td colspan="3" style="padding: 12px 16px 8px 16px;font-size: 14px;font-weight: 700;line-height: 24px;" valign="top"><strong>${replaceInvalidChar(topic)}</strong></td>
+                                            </tr>
+                                        </#if>
+                                        <#if meetingTime??>
+                                            <tr>
+                                                <td valign="top" style="padding: 4px 16px 8px 16px;width: 112px;font-size: 13px;font-weight: 400;line-height: 16px;color: rgba(4, 4, 19, 0.56);">Date & Time</td>
+                                                <td valign="top" style="font-weight: 400;font-size: 13px;line-height: 16px;color: #233333;padding: 4px 16px 8px 0;">${meetingTime}</td>
+                                            </tr>
+                                        </#if>
+                                        <#if meetingNumber??>
+                                            <tr>
+                                                <td valign="top" style="padding: 4px 16px 8px 16px;width: 112px;font-size: 13px;font-weight: 400;line-height: 16px;color: rgba(4, 4, 19, 0.56);">Webinar ID</td>
+                                                <td valign="top" style="font-weight: 400;font-size: 13px;line-height: 16px;color: #233333;padding: 4px 16px 8px 0;">${meetingNumber}</td>
+                                            </tr>
+                                        </#if>
+                                        <#if participantId??>
+                                            <tr>
+                                                <td valign="top" style="padding: 4px 16px 8px 16px;width: 112px;font-size: 13px;font-weight: 400;line-height: 16px;color: rgba(4, 4, 19, 0.56);">${i18nParticipateId!"Participant ID"}</td>
+                                                <td valign="top" style="font-weight: 400;font-size: 13px;line-height: 16px;color: #233333;padding: 4px 16px 8px 0;">${(participantId!'')?html}</td>
+                                            </tr>
+                                        </#if>
+                                        <#if password?? && password != ''>
+                                            <tr>
+                                                <td valign="top" style="padding: 4px 16px 8px 16px;width: 112px;font-size: 13px;font-weight: 400;line-height: 16px;color: rgba(4, 4, 19, 0.56);">Passcode</td>
+                                                <td valign="top" style="font-weight: 400;font-size: 13px;line-height: 16px;color: #233333;padding: 4px 16px 8px 0;">${password?html}</td>
+                                            </tr>
+                                        </#if>
+                                        <#if description?? && description != ''>
+                                            <tr>
+                                                <td valign="top" style="padding: 4px 16px 8px 16px;width: 112px;font-size: 13px;font-weight: 400;line-height: 16px;color: rgba(4, 4, 19, 0.56);">Description</td>
+                                                <td valign="top" style="font-weight: 400;font-size: 13px;line-height: 16px;color: #233333;padding: 4px 16px 8px 0;">${description?html?replace("\n","<br/>\n")}</td>
+                                            </tr>
+                                        </#if>
+                                        <tr>
+                                            <td style="padding: 8px 16px 0;width: 112px;"></td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr><td style="height: 8px;"></td> </tr>
+                            <#if addToCalendarUrl?? && googleCalendarUrl?? && yahooCalendarUrl?? && imageNewFolder??>
+                                <tr>
+                                    <td colspan="2" style="line-height: 32px;padding-top: 16px;padding-bottom: 30px;">
+                                        <span style="font-size: 14px;font-weight: bold;line-height: 20px;color: #222230;vertical-align: middle;">Add to:</span>
+                                        <#if !(account??) || !account.isGoogleCalendarDisabled()>
+                                            <a href="${googleCalendarUrl}" style="letter-spacing: 0;border: 1px solid #3171BB;color: #3171BB;border-radius: 8px;padding: 3px 5px;text-decoration: none;font-weight: 400;font-size: 14px;line-height: 30px;height: 24px;display:inline-flex;vertical-align:middle;">
+                                                <i class="glyphicon" style="width: 20px;display:inline-block;">
+                                                    <img src="${imageNewFolder}/google.png" />
+                                                </i><span style="display:inline-flex;line-height:24px;">&nbsp;Google Calendar</span>
+                                            </a>&nbsp;
+                                        </#if>
+                                        <a href="${addToCalendarUrl}" style="border: 1px solid #0E72ED;color: #0E72ED;border-radius: 8px;padding:3px 5px;text-decoration: none;font-weight: 400;font-size: 14px;line-height: 30px;vertical-align:middle;height: 24px;display:inline-flex;letter-spacing: 0;">
+                                            <i class="glyphicon" style="width: 20px;display:inline-block;">
+                                                <img src="${imageNewFolder}/outlook.png" />
+                                            </i><span style="display:inline-flex;line-height:24px;">&nbsp;Outlook Calendar(.ICS)</span>
+                                        </a>&nbsp;
+                                        <a href="${yahooCalendarUrl}" style="border: 1px solid #952BCE;color: #952BCE;border-radius: 8px;padding: 3px 5px;text-decoration: none;font-weight: 400;font-size: 14px;line-height: 30px;vertical-align:middle;height: 24px;display:inline-flex;letter-spacing: 0;">
+                                            <i class="glyphicon" style="width: 20px;display:inline-block;">
+                                                <img src="${imageNewFolder}/yahoo.png" />
+                                            </i><span style="display:inline-flex;line-height:24px;">&nbsp;Yahoo Calendar</span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <tr></tr>
+                            <#if (customTextHeader!"") != "">
+                                <tr>
+                                    <td colspan="2" valign="top" style="padding-bottom: 8px;height:auto;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;">
+                                        ${(customTextHeader!"")?html?replace("\n","<br>")}
+                                    </td>
+                                </tr>
+                            </#if>
+                            <#if cancelUrl?? && cancelUrl != ''>
+                                <tr>
+                                    <td colspan="2" valign="top" style="padding-bottom: 24px;font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;">
+                                        <#if refundAmount??>
+                                            If you <a href="${cancelUrl}" target="_blank"> cancel your registration </a> before the start of the webinar on (${contractTimeCanRefund}), your PayPal account will be refunded ${refundAmount} within 3-5 business days.
+                                        <#else>
+                                            You can <a href="${cancelUrl}" target="_blank">cancel</a> your registration at any time.<br>
+                                        </#if>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <#if hostEmail??>
+                                <tr>
+                                    <td colspan="2" style="font-size: 14px;font-weight: 400;color: #131619;font-family: Arial;line-height: 24px;" valign="top">
+                                        Please submit any questions to: <a target="_blank" style="color: #000000;text-decoration:none;"> ${hostEmail?html}</a>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <tr>
+                                <td colspan="2" style="font-size: 14px;font-weight: 400;color: #000;font-family: Arial;line-height: 24px;" valign="top">
+                                    Thank you!
+                                </td>
+                            </tr>
+                             <tr>
+                                <td>
+                                    <table align="left" cellpadding="0" cellspacing="0" style="width:100%;">
+                                        <tr>
+                                            <td bgcolor="#ffffff" style="padding: 32px 0 0 0;padding-top: 30px !important;width: 182px;font-size: 12px;line-height: 18px;color: rgba(4, 4, 19, 0.56);font-weight: 700;" valign="top">
+                                                WAYS TO JOIN THIS WEBINAR
+                                            </td>
+                                            <td bgcolor="#ffffff" style="padding: 32px 0 0 8px;padding-top: 38px !important;" valign="top">
+                                                <div style="height: 1px;border-top: 1px dashed rgba(82, 82, 128, 0.18);"></div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="padding-left:12px;padding-top: 28px !important;padding-bottom: 12px !important;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                    <ul style="padding:0;margin:0;"><li class="join1" style="margin-left:0;list-style-type: disc;">Join from PC, Mac, iPad, or Android</li></ul>
+                                </td>
+                            </tr>
+                            <#if joinUrl??>
+                                <tr>
+                                    <td bgcolor="#ffffff" width="122" height="30" style="padding-bottom: 16px;" valign="middle">
+                                        <div style="height: 24px;border-radius: 8px;line-height: 30px;mso-line-height-rule: exactly;">
+                                            <a type="button" href="${joinUrl}" target="_blank" style="height:24px;text-decoration:none;font-size: 14px;font-weight: 500;color: #fff;background: #0E72ED;border-radius: 8px;line-height: 30px;vertical-align:middle;padding: 7px 20px;mso-line-height-rule:exactly;">&nbsp;&nbsp;&nbsp;&nbsp;<span style="line-height:30px;mso-line-height-rule:exactly;">Join Webinar</span>&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <#if joinUrl??>
+                                <tr>
+                                    <td colspan="2" valign="top" style="font-size: 14px;font-weight: 400;color: #000000;font-family: Arial;line-height: 24px;">
+                                        If the button above does not work, paste this into your browser:
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" valign="top" width="536" style="word-break: break-all;font-size: 14px;font-weight: 400;color: #000000;font-family: Arial;line-height: 24px;">
+                                        <a href="${joinUrl}" style="width: 536px;text-decoration:underline;color: #000000;word-wrap:break-word;">${joinUrl}</a>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <tr>
+                                <td colspan="2" style="font-family: Arial;font-size: 14px;font-weight: 700;line-height: 17px;color: #222230;padding-top: 12px;" valign="top">
+                                    To keep this webinar secure, do not share this link publicly.
+                                </td>
+                            </tr>
+                            <#if enablePSTN>
+                            <#--join by telephone-->
+                                <#if isUserTSPEnabled?? && isUserTSPEnabled>
+                                    <tr>
+                                        <td width="100%">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;width:auto;padding:0;margin:0;">
+                                                <tr>
+                                                    <td colspan="2" style="padding: 32px 0 8px 0;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                                        <ul style="padding:0;margin:0;"><li style="margin-left:12px;list-style-type: disc;">Join via audio</li></ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;font-weight: 600;font-size: 14px;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        Or, dial:
+                                                    </td>
+                                                    <td width="836" style="word-break: break-word;padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        <span style="color: #000000;word-wrap: break-word;">
+                                                        <#if tollNumbers?? && ((tollNumbers?size) > 0)>
+                                                            <#list tollNumbers as tollNumber>
+                                                                <#if tollNumber != "">
+                                                                    ${tollNumber}<br>
+                                                                </#if>
+                                                            </#list>
+                                                        </#if>
+                                                        <#if tollFreeNumbers?? && ((tollFreeNumbers?size) > 0)>
+                                                            <#list tollFreeNumbers as tfreeNum>
+                                                                ${tfreeNum} (${tollFreeCountrys[tfreeNum_index]!'US'} Toll Free)<br>
+                                                            </#list>
+                                                        </#if>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td valign="top" style="padding-left: 0;padding-bottom: 4px;width: auto;min-width: 76px;padding-right: 36px;font-size: 14px;color: #233333;font-family: Arial;line-height: 24px;font-weight: 600;">
+                                                        ${(tspPsdTitle!'')?html}:
+                                                    </td>
+                                                    <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        ${(tspPsd!'')?html}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                <#elseif pickedNumbers?? && ((pickedNumbers?size) > 0)>
+                                    <tr>
+                                        <td width="100%">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="table-layout: fixed;width:auto;padding:0;margin:0;">
+                                                <tr>
+                                                    <td colspan="2" style="padding: 32px 0 8px 0;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                                        <ul style="padding:0;margin:0;"><li style="margin-left:12px;list-style-type: disc;">Join via audio</li></ul>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;font-weight: 600;font-size: 14px;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        Or, dial:
+                                                    </td>
+                                                    <td width="836" style="word-break: break-word;padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        <span style="color: #000000;word-wrap: break-word;">
+                                                        <#assign n = 0>
+                                                        <#list pickedNumbers as pickedNumber>
+                                                            <#if (n == 0 || (n > 0 && pickedNumber.country != pickedNumbers[n - 1].country))>
+                                                                <#if (n > 0)><br></#if>${pickedNumber.countryName!'US'}: </#if>
+                                                            <#if (n > 0 && pickedNumber.country == pickedNumbers[n - 1].country)> or </#if>${pickedNumber.displayNumber}
+                                                            <#if pickedNumber.free>(Toll Free)</#if>
+                                                            <#assign n = n + 1>
+                                                        </#list>
+                                                        <#if teleConferenceUrl??>
+                                                            <#if (n > 0)><br></#if><a href="${teleConferenceUrl}" target="_blank" style="font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;vertical-align: top;">More International numbers</a>
+                                                        </#if>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                                <#if meetingNumber??>
+                                                    <tr>
+                                                        <td valign="top" style="padding-left: 0;padding-bottom: 4px;width: auto;min-width: 76px;padding-right: 6px;font-size: 14px;color: #233333;font-family: Arial;line-height: 24px;font-weight: 400;">Webinar ID:</td>
+                                                        <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${meetingNumber}</td>
+                                                    </tr>
+                                                </#if>
+                                                <#if h323Password?? && enablePSTNPasswordProtected??>
+                                                    <tr>
+                                                        <td valign="top" style="width: 100px;padding-left: 0;padding-bottom: 4px;padding-right: 6px;font-weight: 400;font-size: 14px;color: #233333;font-family: Arial;line-height: 24px;">
+                                                            Passcode:
+                                                        </td>
+                                                        <td valign="top" style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;">
+                                                            ${(h323Password!'')?html}
+                                                        </td>
+                                                    </tr>
+                                                </#if>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                            <#elseif useOtherAudioConference>
+                                <tr>
+                                    <td colspan="2" style="padding: 32px 0 8px 12px;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                        <ul style="padding:0;margin:0;"><li class="join1" style="margin-left:0;list-style-type: disc;">Join via audio</li></ul>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2" style="padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${(otherAudioConferenceInfo!"")?html?replace("\n","<br>")}</td>
+                                </tr>
+                            </#if>
+                            <#--Join by H323-->
+                            <#if h323Gateway?? && ((h323Gateway?size) > 0)>
+                                <tr>
+                                    <td style="padding: 24px 0 8px 12px;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                        <ul style="padding:0;margin:0;"><li class="join1" style="margin-left:0;list-style-type: disc;">Join by SIP</li></ul>
+                                    </td>
+                                </tr>
+                                <#if isCRC?? && isCRC>
+                                    <tr>
+                                        <td style="padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                            <a href="_blank" style="color: #232333;text-decoration: none;">${number?c}${(sipDomain!'@zoomcrc.com')?html}</a><br>
+                                        </td>
+                                    </tr>
+                                <#else>
+                                    <tr>
+                                        <td style="padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                            <#list h323Gateway as rc>
+                                                <a href="_blank" style="color: #232333;text-decoration: none;">${number?c}@${rc}</a><br>
+                                            </#list>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if meetingNumber??>
+                                    <tr>
+                                        <td width="100%">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:auto;padding:0;margin:0;">
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">Webinar ID:</td>
+                                                    <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${meetingNumber}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <#if h323Password??>
+                                    <tr>
+                                        <td width="100%">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:auto;padding:0;margin:0;">
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        Passcode:
+                                                    </td>
+                                                    <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${(h323Password!'')?html}</td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </#if>
+                                <tr>
+                                    <td colspan="2" style="padding-top: 24px;padding-bottom: 8px;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                        Or, join by H.323
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td width="100%">
+                                        <table align="left" border="0" cellpadding="0" cellspacing="0" style="width:auto;padding:0;margin:0;">
+                                            <tr>
+                                                <td style="width:100px;padding-left: 0;padding-right: 6px;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                    H.323:
+                                                </td>
+                                                <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                    <#list h323Gateway as rc>
+                                                        ${rc}<br>
+                                                    </#list>
+                                                </td>
+                                            </tr>
+                                            <#if meetingNumber??>
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">Webinar ID:</td>
+                                                    <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${meetingNumber}</td>
+                                                </tr>
+                                            </#if>
+                                            <#if h323Password??>
+                                                <tr>
+                                                    <td style="width: 100px;padding-left: 0;padding-right: 6px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                                        Passcode:
+                                                    </td>
+                                                    <td style="padding-left: 0;padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">${(h323Password!'')?html}</td>
+                                                </tr>
+                                            </#if>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </#if>
+                            <#if enableLync??>
+                                <tr>
+                                    <td style="width: auto;padding-top: 24px;padding-bottom: 8px;font-family: Arial;font-size: 16px;font-weight: 700;line-height: 24px;color: #233333;" valign="top">
+                                        Or, Skype for Business (Lync)
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-bottom: 4px;font-size: 14px;font-weight: 400;color: #233333;font-family: Arial;line-height: 24px;" valign="top">
+                                        <a href="${lyncUrl}" style="color: #232333;text-decoration: underline;">${lyncUrl}</a><br>
+                                    </td>
+                                </tr>
+                            </#if>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td height="32"></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding-top: 24px;padding-bottom: 24px;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" style="width:auto;">
+                <tbody>
+                    <tr>
+                        <td align="center" class="darkmodeblack" style="padding: 30px 30px 0;"><a href="https://www.deriv.com"><img alt="Deriv.com" width="193" src="https://static.deriv.com/logos/deriv-gray-2023.png?v=2" style="display: block; opacity: 70%;"  class="mb-deriv25"/> </a></td>
+                    </tr>
+                    <tr>
+                        <td align="center" class="darkmodeblack" style="padding: 20px 0 10px; ">
+                            <p style="word-spacing: 10px !important;">
+                                <a href="https://www.facebook.com/derivdotcom" style="text-decoration: none;"><img alt="Deriv.com on Facebook" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/facebook-md.png" title="Deriv.com on Facebook" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://www.instagram.com/deriv_official/" style="text-decoration: none;"> <img alt="Deriv.com on Instagram" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/instagram-md.png" title="Deriv.com on Instagram" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://twitter.com/derivdotcom" target="_blank"> <img alt="Deriv.com on Twitter" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/x-twitter-md.png" title="Deriv.com on Twitter" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://www.youtube.com/@Deriv.partners" style="text-decoration: none;"> <img alt="Deriv.com on Youtube" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/youtube-md.png" title="Deriv.com on Youtube" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://www.linkedin.com/showcase/deriv-partners/posts/?feedView=all" style="text-decoration: none;"> <img alt="Deriv.com on Linkedin" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/linkedin-md.png" title="Deriv.com on Linkedin" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://t.me/Derivchannelofficial" style="text-decoration: none;"> <img alt="Deriv.com on Telegram" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/telegram-md.png" title="Deriv.com on Telegram" width="32" class="mb-soc-md" /> </a>
+                                <a href="https://www.whatsapp.com/channel/0029VajV7cY8fewr35BOkF06" style="text-decoration: none;"> <img alt="Deriv.com on WhatsApp" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/whatsapp-md.png" title="Deriv.com on WhatsApp" width="32" class="mb-soc-md" /> </a>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px 10px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">The products offered on our website, including CFDs, are complex derivative products that carry a significant risk of potential loss. You should consider whether you understand how these products work and whether you can afford to take the high risk of losing your money. Trading conditions, products, and platforms may differ depending on your country of residence.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">Deriv (BVI) Ltd is licensed and regulated by the British Virgin Islands Financial Services Commission.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">Deriv (FX) Ltd is licensed and regulated by the Labuan Financial Services Authority</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">
+                            Deriv (V) Ltd is licensed and regulated by the Vanuatu Financial Services Commission.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">
+                            Deriv (Mauritius) Ltd is licensed as an Investment Dealer (Full Service Dealer, excluding Underwriting) under the Securities Act 2005 and is regulated by the Financial Services Commission, Mauritius.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="left" style="padding: 4px 48px 20px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
+                            <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">
+                            Deriv (SVG) LLC is a company registered in Saint Vincent and the Grenadines.</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" bgcolor="#fff" class="darkmodeblack" style="color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400;line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                        <p style="padding: 0px 10px;font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 5px 0px 5px 0px;"><a href="https://deriv.com/partners-help-centre" style="color: #ff444f !important">Help centre</a>   <span class="darkmodegray">|</span>   <a href="https://deriv.com/terms-and-conditions#business-partners" style="color: #ff444f !important">Terms and conditions</a>   <span class="darkmodegray">|</span>   <a href="https://docs.deriv.com/tnc/security-and-privacy.pdf" style="color: #ff444f !important">Security and privacy</a></p>
+
+                        <p class="darkmodegray" style="padding: 0px 10px; font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0px 0px 5px 0px;">No longer want to receive these emails? <a class="darkcolor-subtext" href="https://app.deriv.com/account/personal-details" style="mso-hide:all; color: #ff444f !important;">Unsubscribe</a></p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#fff" align="center"  class="mobile-side darkmodeblack" style="padding: 20px 30px;">
+                            <input type="image" class="g-img" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/invest-in-people-platinum.png"  width= "160" style="display: block;outline:none" class="mb-investor"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

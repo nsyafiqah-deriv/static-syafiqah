@@ -1,3 +1,49 @@
+<#setting url_escaping_charset='UTF-8'>
+<#function replaceInvalidChar name>
+    <#if name??>
+        <#return (name!"")?html?replace(".", "<span>.</span>")?replace(":", "<span>:</span>")>
+    <#else>
+        <#return "">
+    </#if>
+</#function>
+You are invited to register for a ${siteName} webinar!
+
+<#if meetingTime??>
+When: ${meetingTime}
+</#if>
+<#if meetingTopic??>
+    <#if plainText?? && plainText>
+Topic:  ${meetingTopic!''}
+    <#else>
+Topic:  ${(meetingTopic!'')?html}
+    </#if>
+</#if>
+
+Register in advance for this webinar:
+${registerUrl}
+
+<#if h323Gateway?? && ((h323Gateway?size) > 0)>
+Join from an H.323/SIP room system:
+H.323: <#if ((h323Gateway?size) <= 2)>${h323Gateway[0]}<#if ((h323Gateway?size) > 1)> or ${h323Gateway[1]}</#if></#if>
+    <#if ((h323Gateway?size) > 2)>
+        <#list h323Gateway as rc>
+${rc}
+        </#list>
+    </#if>
+Meeting ID: ${meetingNumber}
+    <#if h323Password??>
+Passcode: ${h323Password}
+    </#if>
+    <#if isCRC?? && isCRC>
+SIP: ${number?c}${(sipDomain!'@zoomcrc.com')?html}
+    <#else>
+SIP: ${number?c}@${h323Gateway[0]}<#if ((h323Gateway?size) > 1)> or ${number?c}@${h323Gateway[1]}</#if>
+    </#if>
+    <#if h323Password??>
+Passcode: ${h323Password}
+    </#if>
+</#if>
+
 <!-- FOOTER -->
 <tr>
     <td align="center" bgcolor="#eeeeee" class="mobile-nopadding" style="padding: 0 0 10px;">
@@ -55,6 +101,13 @@
                     <td bgcolor="#fff" align="left" style="padding: 4px 48px 20px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
                         <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">
                         Deriv (SVG) LLC is a company registered in Saint Vincent and the Grenadines.</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" bgcolor="#fff" class="darkmodeblack" style="color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400;line-height: 18px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;">
+                    <p style="padding: 0px 10px;font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 5px 0px 5px 0px;"><a href="https://deriv.com/partners-help-centre" style="color: #ff444f !important">Help centre</a>   <span class="darkmodegray">|</span>   <a href="https://deriv.com/terms-and-conditions#business-partners" style="color: #ff444f !important">Terms and conditions</a>   <span class="darkmodegray">|</span>   <a href="https://docs.deriv.com/tnc/security-and-privacy.pdf" style="color: #ff444f !important">Security and privacy</a></p>
+
+                    <p class="darkmodegray" style="padding: 0px 10px; font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0px 0px 5px 0px;">No longer want to receive these emails? <a class="darkcolor-subtext" href="https://app.deriv.com/account/personal-details" style="mso-hide:all; color: #ff444f !important;">Unsubscribe</a></p>
                     </td>
                 </tr>
                 <tr>
