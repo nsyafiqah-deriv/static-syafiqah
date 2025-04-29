@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weekly Work Hours Calculator</title>
+    <style>
+        body { font-family: sans-serif; margin: 30px; }
+        label { display: inline-block; width: 120px; }
+        input[type="time"] { width: 100px; }
+        .day-row { margin-bottom: 10px; }
+        #results { margin-top: 20px; font-size: 1.2em; color: #2d7a2d;}
+        button { padding: 8px 18px; font-size: 1em;}
+    </style>
+</head>
+<body>
+    <h2>Weekly Work Hours Calculator</h2>
+    <form id="workForm">
+        <div class="day-row">
+            <label>Monday:</label>
+            <input type="time" id="in0" required> -
+            <input type="time" id="out0" required>
+        </div>
+        <div class="day-row">
+            <label>Tuesday:</label>
+            <input type="time" id="in1" required> -
+            <input type="time" id="out1" required>
+        </div>
+        <div class="day-row">
+            <label>Wednesday:</label>
+            <input type="time" id="in2" required> -
+            <input type="time" id="out2" required>
+        </div>
+        <div class="day-row">
+            <label>Thursday:</label>
+            <input type="time" id="in3" required> -
+            <input type="time" id="out3" required>
+        </div>
+        <div class="day-row">
+            <label>Friday:</label>
+            <input type="time" id="in4" required> -
+            <input type="time" id="out4" required>
+        </div>
+        <button type="submit">Calculate</button>
+    </form>
+    <div id="results"></div>
+
+    <script>
+        // Helper: time string ("HH:MM") => total minutes
+        function timeToMinutes(timeStr) {
+            if (!timeStr) return 0;
+            const [h, m] = timeStr.split(":").map(Number);
+            return h * 60 + m;
+        }
+
+        // Helper: minutes => "HH:MM"
+        function formatMinutes(mins) {
+            const h = Math.floor(mins / 60);
+            const m = mins % 60;
+            return h.toString().padStart(2, "0") + ":" + m.toString().padStart(2, "0");
+        }
+
+        document.getElementById('workForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let totalMinutes = 0;
+            let dailyResults = [];
+
+            for(let i=0;i<5;i++){
+                let clockIn = document.getElementById('in'+i).value;
+                let clockOut = document.getElementById('out'+i).value;
+                let minsIn = timeToMinutes(clockIn);
+                let minsOut = timeToMinutes(clockOut);
+                let minsWorked = minsOut - minsIn;
+                if (minsWorked < 0) { minsWorked += 24 * 60; } // overnight case
+                totalMinutes += minsWorked;
+                dailyResults.push(`Day ${i+1}: ${formatMinutes(minsWorked)}`);
+            }
+            document.getElementById('results').innerHTML = 
+                `<strong>Total hours this week:</strong> ${formatMinutes(totalMinutes)}<br>` +
+                dailyResults.join('<br>');
+        });
+    </script>
+</body>
+</html>
