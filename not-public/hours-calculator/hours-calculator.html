@@ -61,6 +61,16 @@
             color: #2d7a2d;
         }
 
+        .positive-balance {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .negative-balance {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
         button { 
             width: 100%;
             padding: 12px;
@@ -182,8 +192,18 @@
             const totalHours = Math.floor(totalMinutes / 60);
             const remainingMinutes = totalMinutes % 60;
             
+            // Calculate balance
+            const standardHours = 40;
+            const totalHoursDecimal = totalHours + (remainingMinutes / 60);
+            const balance = totalHoursDecimal - standardHours;
+            const balanceText = balance >= 0 
+                ? `+${balance.toFixed(2)} hours` 
+                : `${balance.toFixed(2)} hours`;
+            const balanceClass = balance >= 0 ? 'positive-balance' : 'negative-balance';
+            
             document.getElementById('results').innerHTML = 
                 `<strong>Total hours this week:</strong> ${totalHours}h ${remainingMinutes}m<br>` +
+                `<strong>Weekly balance (40h standard):</strong> <span class="${balanceClass}">${balanceText}</span><br>` +
                 dailyResults.join('<br>');
         });
     </script>
