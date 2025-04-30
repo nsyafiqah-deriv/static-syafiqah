@@ -14,5 +14,9 @@
   "emailTemplate:weeklyEconomicCalendar_forAnyLanguage": {
       "description": "Replace the data inside the table with the data from the screenshot",
       "prompt": "Refer to the screenshot, please replace the values inside the table with the values in the screenshotted images. Ignore time (GMT-UTC) column."
+  },
+  "emailTemplate:sameTemplate_differentContent": {
+      "description": "Keeping the same template, update the content to be different",
+      "prompt": "please copy the exact codes from high-leverage-trading-forex-email1.html to maintain the format and style and only change the content according to the image. for image links in the body content, please add placeholder if its not available"
   }
 }
