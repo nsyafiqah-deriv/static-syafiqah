@@ -1,0 +1,21 @@
+---
+description: This rule is intended for creating email templates that comply with Deriv’s design requirements. It ensures that all emails have a consistent header and footer, maintaining brand alignment and a cohesive user experience. Use this rule to streamline the development of emails with unified structure and formatting.
+globs: 
+alwaysApply: false
+---
+## Deriv Red Slash Email guidelines
+
+[EmailTemplateRules]
+require_header = true
+header_template = "deriv-red-slash-header.html"
+
+require_footer = true
+footer_template = "footer.html"
+
+enforce_header_footer_position = top_bottom
+allowed_content_blocks = [ "body", "promotion", "unsubscribe", "legal"]
+
+[Validation]
+raise_error_if_missing = true
+error_message = "All email templates must include the standard Deriv header and footer as per design guidelines."
+

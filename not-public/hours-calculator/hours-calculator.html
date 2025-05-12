@@ -39,6 +39,22 @@
             gap: 10px;
         }
 
+        .leave-options {
+            display: flex;
+            gap: 10px;
+            margin-left: 10px;
+        }
+
+        .leave-options label {
+            min-width: auto;
+            font-weight: normal;
+            font-size: 0.9em;
+        }
+
+        .leave-options input[type="radio"] {
+            margin-right: 2px;
+        }
+
         label { 
             min-width: 100px;
             font-weight: 500;
@@ -69,6 +85,16 @@
         .negative-balance {
             color: #dc3545;
             font-weight: bold;
+        }
+
+        .extra-hours {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+
+        .leave-day {
+            color: #6c757d;
+            font-style: italic;
         }
 
         button { 
@@ -120,26 +146,51 @@
                 <label>Monday:</label>
                 <input type="time" id="in0"> -
                 <input type="time" id="out0">
+                <div class="leave-options">
+                    <label><input type="radio" name="leave0" value="none" checked> No Leave</label>
+                    <label><input type="radio" name="leave0" value="half"> 1/2 Day</label>
+                    <label><input type="radio" name="leave0" value="full"> Full Day</label>
+                </div>
             </div>
             <div class="day-row">
                 <label>Tuesday:</label>
                 <input type="time" id="in1"> -
                 <input type="time" id="out1">
+                <div class="leave-options">
+                    <label><input type="radio" name="leave1" value="none" checked> No Leave</label>
+                    <label><input type="radio" name="leave1" value="half"> 1/2 Day</label>
+                    <label><input type="radio" name="leave1" value="full"> Full Day</label>
+                </div>
             </div>
             <div class="day-row">
                 <label>Wednesday:</label>
                 <input type="time" id="in2"> -
                 <input type="time" id="out2">
+                <div class="leave-options">
+                    <label><input type="radio" name="leave2" value="none" checked> No Leave</label>
+                    <label><input type="radio" name="leave2" value="half"> 1/2 Day</label>
+                    <label><input type="radio" name="leave2" value="full"> Full Day</label>
+                </div>
             </div>
             <div class="day-row">
                 <label>Thursday:</label>
                 <input type="time" id="in3"> -
                 <input type="time" id="out3">
+                <div class="leave-options">
+                    <label><input type="radio" name="leave3" value="none" checked> No Leave</label>
+                    <label><input type="radio" name="leave3" value="half"> 1/2 Day</label>
+                    <label><input type="radio" name="leave3" value="full"> Full Day</label>
+                </div>
             </div>
             <div class="day-row">
                 <label>Friday:</label>
                 <input type="time" id="in4"> -
                 <input type="time" id="out4">
+                <div class="leave-options">
+                    <label><input type="radio" name="leave4" value="none" checked> No Leave</label>
+                    <label><input type="radio" name="leave4" value="half"> 1/2 Day</label>
+                    <label><input type="radio" name="leave4" value="full"> Full Day</label>
+                </div>
             </div>
             <button type="submit">Calculate Hours</button>
         </form>
@@ -161,19 +212,41 @@
             return h.toString().padStart(2, "0") + ":" + m.toString().padStart(2, "0");
         }
 
+        // Helper: minutes => decimal hours
+        function minutesToDecimalHours(mins) {
+            return mins / 60;
+        }
+
         document.getElementById('workForm').addEventListener('submit', function(e) {
             e.preventDefault();
             let totalMinutes = 0;
+            let extraMinutes = 0;
+            let negativeMinutes = 0;
+            let leaveMinutes = 0;
             let dailyResults = [];
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+            const MIN_DAILY_HOURS = 8;
+            const MIN_DAILY_MINUTES = MIN_DAILY_HOURS * 60;
 
             for(let i=0; i<5; i++) {
                 let clockIn = document.getElementById('in'+i).value;
                 let clockOut = document.getElementById('out'+i).value;
+                let leaveStatus = document.querySelector(`input[name="leave${i}"]:checked`).value;
                 
-                // Skip calculation if either time is empty
-                if (!clockIn || !clockOut) {
-                    dailyResults.push(`<span class="not-worked">${days[i]}: Not worked</span>`);
+                // Handle leave days
+                if (leaveStatus === 'full') {
+                    dailyResults.push(`<span class="leave-day">${days[i]}: Full day leave (-${MIN_DAILY_HOURS}h)</span>`);
+                    leaveMinutes += MIN_DAILY_MINUTES;
+                    continue;
+                } else if (leaveStatus === 'half') {
+                    dailyResults.push(`<span class="leave-day">${days[i]}: Half day leave (-${MIN_DAILY_HOURS/2}h)</span>`);
+                    leaveMinutes += MIN_DAILY_MINUTES / 2;
+                    continue;
+                }
+
+                // Skip calculation if either time is empty and no leave selected
+                if ((!clockIn || !clockOut) && leaveStatus === 'none') {
+                    dailyResults.push(`<span class="leave-day">${days[i]}: No time entered</span>`);
                     continue;
                 }
 
@@ -184,27 +257,49 @@
                 if (minsWorked < 0) { 
                     minsWorked += 24 * 60; // overnight case
                 }
+
+                // Calculate daily balance
+                if (minsWorked > MIN_DAILY_MINUTES) {
+                    extraMinutes += (minsWorked - MIN_DAILY_MINUTES);
+                    dailyResults.push(`${days[i]}: ${formatMinutes(minsWorked)} <span class="extra-hours">(+${formatMinutes(minsWorked - MIN_DAILY_MINUTES)})</span>`);
+                } else if (minsWorked < MIN_DAILY_MINUTES) {
+                    negativeMinutes += (MIN_DAILY_MINUTES - minsWorked);
+                    dailyResults.push(`${days[i]}: ${formatMinutes(minsWorked)} <span class="negative-balance">(-${formatMinutes(MIN_DAILY_MINUTES - minsWorked)})</span>`);
+                } else {
+                    dailyResults.push(`${days[i]}: ${formatMinutes(minsWorked)}`);
+                }
                 
                 totalMinutes += minsWorked;
-                dailyResults.push(`${days[i]}: ${formatMinutes(minsWorked)}`);
             }
 
             const totalHours = Math.floor(totalMinutes / 60);
             const remainingMinutes = totalMinutes % 60;
             
-            // Calculate balance
-            const standardHours = 40;
-            const totalHoursDecimal = totalHours + (remainingMinutes / 60);
-            const balance = totalHoursDecimal - standardHours;
-            const balanceText = balance >= 0 
-                ? `+${balance.toFixed(2)} hours` 
-                : `${balance.toFixed(2)} hours`;
-            const balanceClass = balance >= 0 ? 'positive-balance' : 'negative-balance';
+            // Calculate final extra/negative hours (excluding leave)
+            let finalExtraHours = 0;
+            let finalNegativeHours = 0;
             
-            document.getElementById('results').innerHTML = 
-                `<strong>Total hours this week:</strong> ${totalHours}h ${remainingMinutes}m<br>` +
-                `<strong>Weekly balance (40h standard):</strong> <span class="${balanceClass}">${balanceText}</span><br>` +
-                dailyResults.join('<br>');
+            if (extraMinutes > negativeMinutes) {
+                finalExtraHours = minutesToDecimalHours(extraMinutes - negativeMinutes);
+            } else if (negativeMinutes > extraMinutes) {
+                finalNegativeHours = minutesToDecimalHours(negativeMinutes - extraMinutes);
+            }
+            
+            let resultsHTML = 
+                `<strong>Total hours this week:</strong> ${totalHours}h ${remainingMinutes}m<br>`;
+            
+            if (finalExtraHours > 0) {
+                resultsHTML += `<strong>Extra hours:</strong> <span class="extra-hours">+${finalExtraHours.toFixed(2)} hours</span><br>`;
+            } else if (finalNegativeHours > 0) {
+                resultsHTML += `<strong>Negative balance:</strong> <span class="negative-balance">-${finalNegativeHours.toFixed(2)} hours</span><br>`;
+            }
+
+            if (leaveMinutes > 0) {
+                resultsHTML += `<strong>Leave deductions:</strong> <span class="leave-day">-${minutesToDecimalHours(leaveMinutes).toFixed(2)} hours</span><br>`;
+            }
+            
+            resultsHTML += dailyResults.join('<br>');
+            document.getElementById('results').innerHTML = resultsHTML;
         });
     </script>
 </body>
