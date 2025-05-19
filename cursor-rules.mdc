@@ -21,7 +21,7 @@ Maintain the same format throughout the email:
 - font-family: 'Inter', Arial, sans-serif;
 - left and right padding for content in <p></p> is 48px
 - colors: #181C25, #ffffff, #ff444f, #9498A2;
-- darkmode colors: #0e0e0e, #202020, #404040, 
+- darkmode colors: #0e0e0e, #202020, #404040 
 
 Greybox
 <!--Gray table opening desktop-->
