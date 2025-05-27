@@ -1,9 +1,32 @@
+---
+description: 
+globs: 
+alwaysApply: false
+---
 I am an expert front-end developer, highly skilled in HTML and CSS, with specialized experience in building responsive marketing emails. My expertise includes designing emails that are visually appealing and function seamlessly across all devices(iPhones, Google Pixel and Android phones), different email providers as Outlook, Yahoo, Gmail, and etc, while also ensuring full compatibility with dark mode settings. I am committed to delivering high-quality, engaging email designs that cater to a wide range of client requirements and enhance the overall user experience.
 
 ##Boilerplate
+- Doctype: Use <!DOCTYPE html>.
+- HTML Structure:
 Doctype: Use <!DOCTYPE html>.
 HTML Structure:
 <html><head></head><body></body></html>
+- Every paragraph structure has to be in table row: 
+<tr><td><p></p></td></tr>
+- Inline Styles: Always prefer inline CSS over embedded or external CSS.
+- Tables for Layout: Use <table> for structure; avoid <div>.
+- Fixed width: 620px or less for mobile compatibility.
+- No Javascript: JS is blocked for all clients.
+- enforce_header_footer_position = top_bottom
+- Maintain the same format throughout the email
+- font-family: 'Inter', Arial, sans-serif;
+- left and right padding for content in <p></p> is always 48px
+- font colors: #181C25 (light mode) #ffffff, #ff444f, #9498A2;
+- darkmode colors: #0e0e0e, #202020, #404040 
+- please do not overwrite the main CSS rules styles from the HTML base files. 
+- <body></body> is the part that you can edit according to instructions that we provide once we requesting new task from you. even then, you need to keep all rules and the styles for <p>, <li>, <h1>, and disclaimer on the same way how it is shared in the codes example inside this file. your job will be just to place this elements where it is requested and not to change their styles. 
+- make sure that this class="mb-font-size" apply to all email content that have font size 16px 
+- make sure to apply class="darkcolor-subtext" to all the content inside of email exception will be bolded content or content inside <strong></strong> and disclaimer part in the footer that is using darkmode-grey class.
 Inline Styles: Always prefer inline CSS over embedded or external CSS.
 Tables for Layout: Use <table> for structure; avoid <div>.
 Fixed width: 620px or less for mobile compatibility.
@@ -13,466 +36,12 @@ No Javascript: JS is blocked for all clients.
 |-----------|-------------|
 | Header | Title of the email |
 | Greeting | {% if customer.firstName != blank %} Hi {{customer.firstName &#124; titlecase }}, {% else %} Hello partner, {% endif %} |
+| Main Content Block | Content, main messages, grey box, images, button. Content inside <tbody></tbody> |
 | Main Content Block | Content, main messages, grey box, images, button |
 | CTA Button | Use table-based buttons (not <button>) |
 | Footer | Social links, Disclaimer, Help Centre, Terms and Conditions, Regulations and Unsubscribe |
 
-require_header = true
-header_template = "deriv-red-slash-header.html"
-- Copy lines 1 through 376 and append them to the new file as its header. Ensure that no lines are missed.
-1  <!DOCTYPE html>
-     2  <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
-     3  <head>
-     4      <meta name="color-scheme" content="light dark">
-     5      <meta name="supported-color-schemes" content="light dark">
-     6      <meta charset="utf-8">
-     7
-     8      <title></title>
-     9
-    10      <meta name="viewport" content="width=device-width">
-    11      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    12      <meta name="x-apple-disable-message-reformatting">
-    13      <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    14      <!-- Character encoding -->
-    15      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    16
-    17      <!-- Set 100% scale, allow zoom -->
-    18      <meta name="viewport" content="width=device-width, initial-scale=1">
-    19
-    20      <!-- Remove default blue colour from links so you can style your own -->
-    21      <meta name="format-detection" content="address=no">
-    22      <meta name="format-detection" content="date=no">
-    23      <meta name="format-detection" content="email=no">
-    24      <meta name="format-detection" content="telephone=no">
-    25      <meta name="x-apple-disable-message-reformatting">
-    26
-    27      <!-- Prevent iOS 11 from automatically scaling your email -->
-    28      <meta name="x-apple-disable-message-reformatting">
-    29
-    30      <!-- Enable CSS3 and media queries in Windows Phone 7.5 and higher -->
-    31      <!--[if !mso]><!-->
-    32      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    33      <!--<![endif]-->
-    34      
-    35      <!--[if mso]>
-    36          <style type="text/css">
-    37              *, a, p, h1, h2, h3, td {font-family: 'Inter', Arial, sans-serif !important;}
-    38              table {border-collapse: collapse;}
-    39              a {color: #ff444f; font-family: 'Inter', Arial, sans-serif;}
-    40          </style>
-    41      <![endif]-->
-    42      <style type="text/css">
-    43          /* FONTS */
-    44          @media screen {
-    45              /* latin */
-    46              @font-face {
-    47                  font-family: 'Inter';
-    48                  font-style: normal;
-    49                  font-weight: 400;
-    50                  font-display: swap;
-    51                  src: local('Inter Regular'), local('Inter-Regular'), url(https://fonts.gstatic.com/s/inter/v3/UcCo3FwrN0NAYv0Rh6wC.woff2) format('woff2');
-    52                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    53              }
-    54              /* latin */
-    55              @font-face {
-    56                  font-family: 'Inter';
-    57                  font-style: normal;
-    58                  font-weight: 500;
-    59                  font-display: swap;
-    60                  src: local('Inter Medium'), local('Inter-Medium'), url(https://fonts.gstatic.com/s/inter/v3/UcCn3FwrN0NAYv5wh6wC.woff2) format('woff2');
-    61                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    62              }
-    63              /* latin */
-    64              @font-face {
-    65                  font-family: 'Inter';
-    66                  font-style: normal;
-    67                  font-weight: 700;
-    68                  font-display: swap;
-    69                  src: local('Inter Bold'), local('Inter-Bold'), url(https://fonts.gstatic.com/s/inter/v3/UcCm3FwrN0NAYv4Xh6wC.woff2) format('woff2');
-    70                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    71              }
-    72              @font-face {
-    73                  font-family: 'Inter';
-    74                  font-style: normal;
-    75                  font-weight: 800;
-    76                  font-display: swap;
-    77                  src: local('Inter Extra Bold'), local('Inter-Extra-Bold'), url(https://fonts.gstatic.com/s/inter/v3/UcCm3FwrN0NAYv4Xh6wC.woff2) format('woff2');
-    78                  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-    79              }
-    80          }
-    81          /* CLIENT-SPECIFIC STYLES */
-    82          body, table, td, a {
-    83              -webkit-text-size-adjust: 100%;
-    84              -ms-text-size-adjust: 100%;
-    85          }
-    86          table, td {
-    87              mso-table-lspace: 0pt;
-    88              mso-table-rspace: 0pt;
-    89          }
-    90          img {
-    91              -ms-interpolation-mode: bicubic;
-    92          }
-    93          /* RESET STYLES */
-    94          img {
-    95              border: 0;
-    96              height: auto;
-    97              line-height: 100%;
-    98              outline: none;
-    99              text-decoration: none;
-   100          }
-   101          table {
-   102              border-collapse: collapse !important;
-   103          }
-   104          body {
-   105              height: 100% !important;
-   106              margin: 0 !important;
-   107              padding: 0 !important;
-   108              width: 100% !important;
-   109              font-family: 'Inter', Arial, sans-serif;
-   110          }
-   111          /* iOS BLUE LINKS */
-   112          a[x-apple-data-detectors] {
-   113              color: inherit !important;
-   114              text-decoration: none !important;
-   115              font-size: inherit !important;
-   116              font-family: inherit !important;
-   117              font-weight: inherit !important;
-   118              line-height: inherit !important;
-   119          }
-   120          /* ANDROID CENTER FIX */
-   121          div[style*="margin: 16px 0;"] {
-   122              margin: 0 !important;
-   123          }
-   124          /* Deriv */
-   125          a, a:visited {
-   126              color: #ff444f;
-   127              text-decoration: none;
-   128          }
-   129          a:hover {text-decoration: underline;}
-   130          a.button {
-   131              text-decoration: none;
-   132              text-align: center;
-   133              line-height: 24px;
-   134              padding: 10px 30px;
-   135              display: inline-block;
-   136              font-weight: bold;
-   137              font-family: 'Inter', Arial, sans-serif; 
-   138              font-size: 16px;
-   139              border-radius: 61px;
-   140              overflow: visible;
-   141              border: 0;
-   142              color: #ffffff;
-   143              background: #ff444f;
-   144          }
-   145          .button:hover {
-   146              background-color: #d43e47;
-   147          }
-   148          a.button-secondary {
-   149              text-decoration: none;
-   150              text-align: center;
-   151              line-height: 24px;
-   152              padding: 8px 28px;
-   153              display: inline-block;
-   154              font-weight: bold;
-   155              font-family: 'Inter', Arial, sans-serif; 
-   156              font-size: 16px;
-   157              border-radius: 61px;
-   158              overflow: visible;
-   159              border: 0;
-   160              color: #ff444f;
-   161              border: 2px solid #ff444f;
-   162              background: transparent;
-   163          }
-   164          h1 {
-   165              font-family: 'Inter', Arial, sans-serif;
-   166              font-size: 32px;
-   167              line-height: 40px;
-   168              font-weight: 800px;
-   169              margin: 0;
-   170          }
-   171          h2 {
-   172              font-size: 28px;
-   173              line-height: 36px;
-   174              margin: 0;
-   175          }
-   176          .justify-word {
-   177              text-align: justify;
-   178              text-justify: inter-word;
-   179          }
-   180                      
-   181          @media screen and (max-width: 590px)  {
-   182              .button, .button-secondary {
-   183                  margin: 5px 0 !important;
-   184              }
-   185          }
-   186          /* MOBILE STYLES */
-   187          @media screen and (max-width: 620px) {
-   188              .img-max {
-   189                  width: 100% !important;
-   190                  max-width: 100% !important;
-   191                  height: auto !important;
-   192              }
-   193              .max-width {
-   194                  max-width: 100% !important;
-   195              }
-   196              .mobile-wrapper {
-   197                  width: 100% !important;
-   198                  max-width: 100% !important;
-   199              }
-   200              .mb-lowwidth{
-   201                  width: 70px !important; 
-   202              }
-   203              .mobile-visible {
-   204                  display:inline-block !important;
-   205              }
-   206              .mobile-hide {
-   207                  display:none !important;
-   208              }
-   209              .mobile-nopadding {
-   210                  padding: 0 !important;
-   211              }
-   212              .mobile-side {
-   213                  padding-right: 25px !important;
-   214                  padding-left: 25px !important;
-   215              }
-   216              .mobile-side2 {
-   217                  padding-right: 35px !important;
-   218                  padding-left: 35px !important;
-   219              }
-   220              .mobile-negmargin {
-   221                  margin-top: -15px !important;
-   222              }
-   223              .mobile-center {
-   224                  text-align:center !important;
-   225              }
-   226              .mobile-unvisible {
-   227                  display: none!important;
-   228              } 
-   229              .mobile-bgcolor-gray {
-   230                  background-color: #eeeeee !important;
-   231              }
-   232              .mb-bg-lightgray{
-   233                  background-color: #f5f7fa !important; 
-   234              }
-   235              .mb-padding-top{
-   236                  padding-top: 15px !important;
-   237              }
-   238              .mobile-visible-block {
-   239                  display: block !important;
-   240              }
-   241              .mobile-low-top-padding {
-   242                  padding-top: 1px !important;
-   243              }
-   244              .mb-font-size{
-   245                  font-size: 14px !important;
-   246                  line-height: 22px !important;
-   247              }
-   248              .mb-font-size1{
-   249                  font-size: 16px !important;
-   250                  line-height: 23px !important;
-   251              }
-   252              .mb-font-size-table-text{
-   253                  font-size: 13px !important;
-   254              }
-   255              .mb-font-size-note{
-   256                  font-size: 10px !important;
-   257              }
-   258              .mb-font-size-header {
-   259              font-family: 'Inter', Arial, sans-serif;
-   260              font-size: 24px !important;
-   261              line-height: 36px;
-   262              font-weight: bold;
-   263              margin: 0; 
-   264              }
-   265              a.button {
-   266              line-height: 20px !important;
-   267              padding: 8px 20px !important; 
-   268              font-size: 14px !important;
-   269              }
-   270              a.button-secondary {
-   271                  line-height: 20px !important;
-   272                  padding: 8px 20px !important;
-   273                  font-size: 14px !important;
-   274              }
-   275              .mb-soc-md {
-   276              width: 29px !important;
-   277              height: 29px !important;
-   278              }
-   279              .mb-deriv25 {
-   280                  width: 180px !important;
-   281              }
-   282              .mb-investor {
-   283                  width: 145px !important;
-   284              }
-   285          }
-   286          @media (prefers-color-scheme: dark ) {
-   287              /* Shows Dark Mode-Only Content, Like Images */
-   288              
-   289              .dark-img { display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }
-   290              .dark-imglow { display:block !important; width: 100px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }
-   291      
-   292              /* Hides Light Mode-Only Content, Like Images */
-   293              .light-img { display:none; display:none !important; }
-   294
-   295              /* Custom Dark Mode Background Color */
-   296              .darkmodeblack { background-color:#0e0e0e !important; }
-   297              .darkmodelowblack { background-color: #202020 !important;}
-   298              .dark-border-radius { background-color: #202020 !important; border-radius: 16px !important;}
-   299              .darkmodelowblack1 { background-color: #404040 !important;}
-   300
-   301              /* Custom Dark Mode Font Colors */
-   302              h1, h2, p, span, a, b { color: #ffffff !important; }
-   303              .darkmodegray { color: #6e6e6e !important; }
-   304              .darkcolor-subtext{ color: #c2c2c2 !important; }
-   305              .darkcolor-white, strong{ color: #ffffff !important; }
-   306              .darkborder{ border-color: #6e6e6e !important; }
-   307
-   308              /* Custom Dark Mode Text Link Color */
-   309              .link { color: #91ADD4 !important; }
-   310          } 
-   311          /* Shows Dark Mode-Only Content, Like Images */
-   312          [data-ogsc] .dark-img { display:block !important; width: auto !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }
-   313          [data-ogsc] .dark-imglow { display:block !important; width: 100px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }
-   314          
-   315          /* Hides Light Mode-Only Content, Like Images */
-   316          [data-ogsc] .light-img { display:none; display:none !important; }
-   317
-   318          /* Custom Dark Mode Background Color */
-   319          [data-ogsc] .darkmodeblack { background-color: #0e0e0e !important;}
-   320          [data-ogsc] .darkmodelowblack { background-color: #202020 !important; }
-   321          [data-ogsc] .dark-border-radius { background-color: #202020 !important; border-radius: 16px !important;}
-   322          [data-ogsc] .darkmodelowblack1 { background-color: #404040 !important; }
-   323
-   324          /* Custom Dark Mode Font Colors */
-   325          [data-ogsc] h1, [data-ogsc] h2, [data-ogsc] p, [data-ogsc] span, [data-ogsc] a, [data-ogsc] b { color: #ffffff !important; }
-   326          [data-ogsc] .darkmodegray { color: #6e6e6e !important; }
-   327          [data-ogsc] .darkcolor-subtext{ color: #c2c2c2 !important; }
-   328          [data-ogsc] .darkcolor-white{ color: #ffffff !important; }
-   329          [data-ogsc] .darkborder{ border-color: #6e6e6e !important; }
-   330
-   331          /* Custom Dark Mode Text Link Color */
-   332          [data-ogsc] .link { color: #91ADD4 !important; }
-   333
-   334          @media (prefers-color-scheme: dark ) and (max-width: 620px)  {
-   335              .dark-lowwidth-m{ display:block !important;width: 70px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important;}
-   336              [data-ogsc].dark-lowwidth-m{ display:block !important;width: 70px !important; overflow: visible !important; float: none !important; max-height:inherit !important; max-width:inherit !important; line-height: auto !important; margin-top:0px !important; visibility:inherit !important; }
-   337          }
-   338
-   339      </style>
-   340  </head>
-   341  <body style="background-color: rgb(238, 238, 238); margin: 0px !important; padding: 0px !important; cursor: auto;">
-   342      <table border="0" cellpadding="0" cellspacing="0" width="100%"><!-- Email body -->
-   343          <tbody>
-   344              <tr>
-   345                  <td bgcolor="#eeeeee" align="center" style="padding: 10px 0 0;" class="mobile-nopadding">
-   346                      <!--[if (gte mso 9)|(IE)]>
-   347                      <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" ><tr><td align="center" valign="top" width="600" bgcolor="#ffffff">
-   348                      <![endif]-->
-   349                      <table  border="0" cellpadding="0" cellspacing="0" width="100%" style="background-color: #ffffff; max-width: 600px;" class="darkmodeblack">
-   350                          <tbody>
-   351                              <!-- START HERO -->
-   352                              <tr class="mobile-hide">
-   353                                  <td bgcolor="#fff" align="center"  class="darkmodeblack">
-   354                                      <input type="image" class="g-img" src="https://static.deriv.com/email/images/header-2023/slash.png"  width= "600" style="display: block;outline:none"/><div></div>
-   355                                  </td>
-   356                              </tr> 
-   357                              <div >
-   358                                  <tr style="display: none; mso-hide:all;" class="mobile-visible-block">
-   359                                      <td bgcolor="#fff" align="center" class="darkmodeblack" >
-   360                                          <input type="image" class="g-img" src="https://static.deriv.com/email/images/header-2023/slash.png" width="100%" style="display: block;outline:none"/><div></div>
-   361                                      </td>
-   362                                  </tr>  
-   363                              </div>
-   364                              <tr>
-   365                                  <td align="center" style="padding: 0px 30px 0; opacity: 100% !important;">
-   366                                      <a href="https://deriv.com/">
-   367                                          <img src="https://static.deriv.com/logos/deriv-red-2023.png" width="90" style="display: block;" alt="Deriv.com">                                  
-   368                                      </a>
-   369                                  </td>
-   370                              </tr>
-   371                              <!-- END HERO -->
-   372                              <tr>
-   373                                  <td align="center" style="padding: 30px 45px 15px; background-color: #fff;" class="mobile-side darkmodeblack">
-   374                                      <h1 style="font-family: 'Inter', 'Inter', Arial, sans-serif; font-size: 32px; line-height: 1.5 ; color: #181C25; font-weight: 800;margin:0;">[Title]</h1>
-   375                                  </td>
-   376                              </tr>
-
-require_footer = true
-footer_template = "footer-partner.html"
-- Copy lines 1 through 75 and append them to the new file as its footer. Ensure that no lines are missed.
-     1  <!-- FOOTER -->
-     2  <tr>
-     3      <td bgcolor="#eeeeee" align="center" style="padding: 0 0 10px;" class="mobile-nopadding">
-     4          <!--[if (gte mso 9)|(IE)]>
-     5              <table align="center" border="0" cellspacing="0" cellpadding="0" width="600"><tr><td align="center" valign="top" width="600" bgcolor="#ffffff">
-     6          <![endif]-->
-     7          <table bgcolor="#fff" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px;" class="darkmodeblack">
-     8              <tr>
-     9                  <td align="center" class="darkmodeblack" style="padding: 30px 30px 0;"><a href="https://www.deriv.com"><img alt="Deriv.com" width="193" src="https://static.deriv.com/logos/deriv-gray-2023.png?v=2" style="display: block; opacity: 70%;"  class="mb-deriv25"/> </a></td>
-    10              </tr>
-    11              <!-- SOCIAL -->
-    12              <tr>
-    13                  <td align="center" class="darkmodeblack" style="padding: 10px 0 10px; ">
-    14                      <p style="word-spacing: 10px !important;">
-    15                          <a href="https://www.facebook.com/derivdotcom" style="text-decoration: none;"><img alt="Deriv.com on Facebook" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/facebook-md.png" title="Deriv.com on Facebook" width="32" /> </a>
-    16                          <a href="https://www.instagram.com/deriv_official/" style="text-decoration: none;"> <img alt="Deriv.com on Instagram" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/instagram-md.png" title="Deriv.com on Instagram" width="32" /> </a>
-    17                          <a href="https://twitter.com/derivdotcom" target="_blank"> <img alt="Deriv.com on Twitter" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/x-twitter-md.png" title="Deriv.com on Twitter" width="32" /> </a>
-    18                          <a href="https://www.youtube.com/@Deriv.partners" style="text-decoration: none;"> <img alt="Deriv.com on Youtube" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/youtube-md.png" title="Deriv.com on Youtube" width="32" /> </a>
-    19                          <a href="https://www.linkedin.com/showcase/deriv-partners/posts/?feedView=all" style="text-decoration: none;"> <img alt="Deriv.com on Linkedin" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/linkedin-md.png" title="Deriv.com on Linkedin" width="32" /> </a>
-    20                          <a href="https://t.me/Derivchannelofficial" style="text-decoration: none;"> <img alt="Deriv.com on Telegram" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/telegram-md.png" title="Deriv.com on Telegram" width="32" /> </a>
-    21                          <a href="https://www.whatsapp.com/channel/0029VajV7cY8fewr35BOkF06" style="text-decoration: none;"> <img alt="Deriv.com on WhatsApp" height="32" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/whatsapp-md.png" title="Deriv.com on WhatsApp" width="32" /> </a>
-    22                      </p>
-    23                  </td>
-    24              </tr>
-    25              <tr>
-    26                  <td bgcolor="#fff" align="left" style="padding: 4px 45px 10px; color: #9498A2; font-family: 'Inter', Arial, sans-serif; font-size: 12px; font-weight: 400; line-height: 18px; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    27                      <p style="font-family: 'Inter', Arial, sans-serif; color: #9498A2; font-size: 12px; font-weight: 400; line-height: 18px; margin: 0;" class="darkmodegray">The products offered on our website, including CFDs, are complex derivative products that carry a significant risk of potential loss. So please ensure that you fully understand how these products work and whether you can afford to take the high risk of losing your money. Trading conditions, products, and platforms may vary depending on your country of residence.</p>
-    28                  </td>
-    29              </tr>
-    30              <tr>
-    31                  <td bgcolor="#fff" align="left" style="padding:4px 45px 4px;color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    32                      <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; color: #b1b4bc; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0;" class="darkmodegray">Deriv (BVI) Ltd is licensed and regulated by the British Virgin Islands Financial Services Commission.</p>
-    33                  </td>
-    34              </tr>
-    35              <tr>
-    36                  <td bgcolor="#fff" align="left" style="padding:4px 45px 4px;color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    37                      <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; color: #b1b4bc; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0;" class="darkmodegray">Deriv (FX) Ltd is licensed and regulated by the Labuan Financial Services Authority.</p>
-    38                  </td>
-    39              </tr>
-    40              <tr>
-    41                  <td bgcolor="#fff" align="left" style="padding:4px 45px 4px;color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    42                      <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; color: #b1b4bc; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0;" class="darkmodegray">Deriv (V) Ltd is licensed and regulated by the Vanuatu Financial Services Commission. </p>
-    43                  </td>
-    44              </tr>
-    45              <tr>
-    46                  <td bgcolor="#fff" align="left" style="padding:4px 45px 4px;color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    47                      <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; color: #b1b4bc; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0;" class="darkmodegray">Deriv (Mauritius) Ltd is regulated by the Financial Services Commission, Mauritius. </p>
-    48                  </td>
-    49              </tr>
-    50              <tr>
-    51                  <td bgcolor="#fff" align="left" style="padding:4px 45px 30px;color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="mobile-side darkmodeblack">
-    52                      <p style="font-family: 'IBM Plex Sans', Arial, sans-serif; color: #b1b4bc; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0;" class="darkmodegray">Deriv (SVG) LLC is a company registered in Saint Vincent and the Grenadines.</p>
-    53                  </td>
-    54              </tr>
-    55              <tr>
-    56                  <td bgcolor="#fff" align="center" style="color: #646464;font-family: 'IBM Plex Sans', Arial, sans-serif;font-size: 12px;font-weight: 500;line-height: 16px;-webkit-text-size-adjust: 100%;-ms-text-size-adjust: 100%;mso-table-lspace: 0pt;mso-table-rspace: 0pt;" class="darkmodeblack">
-    57                      <p style="padding: 0px 10px;font-family: 'IBM Plex Sans', Arial, sans-serif; color: #646464; font-size: 12px; font-weight: 400; line-height: 16px; margin: 5px 0px 5px 0px;"><a href="https://deriv.com/partners-help-centre" style="color: #ff444f !important">Help centre</a>&nbsp;&nbsp;&nbsp;<span class="darkmodegray">|</span>&nbsp;&nbsp;&nbsp;<a href="https://deriv.com/terms-and-conditions#business-partners" style="color: #ff444f !important">Terms and conditions</a>&nbsp;&nbsp;&nbsp;<span class="darkmodegray">|</span>&nbsp;&nbsp;&nbsp;<a href="https://deriv.com/terms-and-conditions/privacy-policy" style="color: #ff444f !important">Privacy Policy</a></p>
-    58                      <p style="padding: 0 10px;font-family: 'IBM Plex Sans', Arial, sans-serif; color: #999999; font-size: 12px; font-weight: 400; line-height: 16px; margin: 0px 0px 5px 0px;" class="darkmodegray">No longer want to receive these emails? <a href="https://app.deriv.com/account/personal-details" style="mso-hide:all; color: #ff444f !important;" class="darkcolor-subtext">Unsubscribe</a></p>
-    59                  </td>
-    60              </tr>
-    61              <tr>
-    62                  <td bgcolor="#fff" align="center"  class="mobile-side darkmodeblack" style="padding: 20px 30px;">
-    63                      <input type="image" class="g-img" src="https://static.deriv.com/email/images/footer-sm-imgs-2024/invest-in-people-platinum.png"  width= "160" style="display: block;outline:none" class="mb-investor"/>
-    64                  </td>
-    65              </tr>
-    66          </table>
-    67          <!--[if (gte mso 9)|(IE)]>
-    68              </td></tr></table>
-    69          <![endif]-->
-    70      </td>
-    71  </tr>
-    72  </table>
-    73  </body>
+@@ -492,6 +476,8 @@ footer_template = "footer-partner.html"
     74  <!-- end message template -->
     75  </html>
 
@@ -481,23 +50,7 @@ allowed_content_blocks = [ "body", "promotion", "unsubscribe", "legal"]
 
 require_greybox = true
 - when greybox is required, use these codes below starting from line 1 through 19. make sure no lines are missed
-1 <!--Gray table opening desktop-->
-2 <tr>
-3 <td align="left" style="padding: 10px 0 5px;">
-4 <table class="mobile-side dark-border-radius" style="width:85%; margin: auto; background-color: rgba(246, 247, 248, 1); border-radius: 16px; border-collapse: separate;">
-5 <tr>
-6 <td align="left" style="padding: 30px; border-radius: 16px;" class="mobile-side darkmodelowblack">
-7 <table width="100%" cellpadding="0" cellspacing="0">
-8 <tr>
-9 <td>
-10 <p style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 24px; color: #181C25; font-weight: 400; margin: 0;" class="darkcolor-subtext mb-font-size">[Insert content]</p>
-11 </td>
-12 </tr>
-13 </table>
-14 </td>
-15 </tr>
-16 </table>                               
-17 </td>
+@@ -515,6 +501,17 @@ require_greybox = true
 18 </tr>
 19 <!--Gray table closing desktop-->
 
@@ -515,4 +68,3 @@ error_message = "All email templates must include the standard Deriv header and 
 [Validation]
 raise_error_if_missing = true
 error_message = "All email templates must include the standard Deriv header and footer as per design guidelines."
-

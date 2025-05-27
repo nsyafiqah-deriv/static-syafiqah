@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deriv Email Template</title>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            .darkcolor-subtext {
+                color: #ffffff !important;
+            }
+            .darkmode-grey {
+                color: #9498A2 !important;
+            }
+            body {
+                background-color: #0e0e0e !important;
+            }
+            .greybox {
+                background-color: #202020 !important;
+            }
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif; background-color: #ffffff;">
+    <!-- Header -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #ff444f;">
+        <tr>
+            <td align="center">
+                <table width="620" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="padding: 20px 48px;">
+                            <img src="https://deriv.com/images/logo/deriv-white.svg" alt="Deriv Logo" width="140" style="display: block;">
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Content Section -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td align="center">
+                <table width="620" cellpadding="0" cellspacing="0" border="0">
+                    <tbody>
+                        <!-- Greeting -->
+                        <tr>
+                            <td style="padding: 40px 48px 20px;">
+                                <p class="mb-font-size darkcolor-subtext" style="margin: 0; font-size: 16px; line-height: 24px; color: #181C25;">
+                                    {% if customer.firstName != blank %}
+                                    Hi {{customer.firstName | titlecase }},
+                                    {% else %}
+                                    Hello partner,
+                                    {% endif %}
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- Main Content -->
+                        <tr>
+                            <td style="padding: 0 48px;">
+                                <p class="mb-font-size darkcolor-subtext" style="margin: 0 0 20px; font-size: 16px; line-height: 24px; color: #181C25;">
+                                    Welcome to our latest update. We're excited to share some important information with you.
+                                </p>
+                            </td>
+                        </tr>
+
+                        <!-- Grey Box -->
+                        <tr>
+                            <td style="padding: 0 48px;">
+                                <table width="100%" cellpadding="0" cellspacing="0" border="0" class="greybox" style="background-color: #f2f3f4; border-radius: 8px; margin: 20px 0;">
+                                    <tr>
+                                        <td style="padding: 24px;">
+                                            <p class="mb-font-size darkcolor-subtext" style="margin: 0; font-size: 16px; line-height: 24px; color: #181C25;">
+                                                Important information goes here. This grey box helps highlight key messages and make them stand out from the rest of the content.
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- CTA Button -->
+                        <tr>
+                            <td style="padding: 20px 48px;">
+                                <table width="auto" cellpadding="0" cellspacing="0" border="0" style="margin: 0 auto;">
+                                    <tr>
+                                        <td align="center" style="background-color: #ff444f; border-radius: 4px;">
+                                            <a href="#" style="display: inline-block; padding: 12px 24px; color: #ffffff; text-decoration: none; font-size: 16px; font-weight: bold;">Get Started Now</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <!-- Unordered List -->
+                        <tr>
+                            <td style="padding: 20px 48px;">
+                                <ul style="margin: 0; padding-left: 20px;">
+                                    <li class="mb-font-size darkcolor-subtext" style="margin-bottom: 12px; font-size: 16px; line-height: 24px; color: #181C25;">Access to premium features</li>
+                                    <li class="mb-font-size darkcolor-subtext" style="margin-bottom: 12px; font-size: 16px; line-height: 24px; color: #181C25;">24/7 customer support</li>
+                                    <li class="mb-font-size darkcolor-subtext" style="margin-bottom: 12px; font-size: 16px; line-height: 24px; color: #181C25;">Advanced trading tools</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+    <!-- Footer -->
+    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="background-color: #f2f3f4; margin-top: 40px;">
+        <tr>
+            <td align="center">
+                <table width="620" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <td style="padding: 40px 48px;">
+                            <!-- Social Links -->
+                            <table width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-bottom: 20px;">
+                                <tr>
+                                    <td align="center">
+                                        <a href="https://www.facebook.com/derivdotcom" style="text-decoration: none; margin: 0 10px;"><img src="https://deriv.com/images/social/facebook.png" alt="Facebook" width="32"></a>
+                                        <a href="https://twitter.com/derivdotcom" style="text-decoration: none; margin: 0 10px;"><img src="https://deriv.com/images/social/twitter.png" alt="Twitter" width="32"></a>
+                                        <a href="https://www.instagram.com/deriv_official" style="text-decoration: none; margin: 0 10px;"><img src="https://deriv.com/images/social/instagram.png" alt="Instagram" width="32"></a>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <!-- Disclaimer -->
+                            <p class="darkmode-grey" style="margin: 0; font-size: 12px; line-height: 18px; color: #9498A2; text-align: center;">
+                                This email was sent to you because you have an account with Deriv.com. If you no longer wish to receive these emails, you can <a href="#" style="color: #ff444f; text-decoration: none;">unsubscribe</a>.
+                            </p>
+                            <p class="darkmode-grey" style="margin: 10px 0 0; font-size: 12px; line-height: 18px; color: #9498A2; text-align: center;">
+                                © 2024 Deriv | All rights reserved
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html> 
