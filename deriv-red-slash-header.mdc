@@ -9,10 +9,21 @@ I am an expert front-end developer, highly skilled in HTML and CSS, with special
 Doctype: Use <!DOCTYPE html>.
 HTML Structure:
 <html><head></head><body></body></html>
+Every paragraph structure has to be in table row: 
+<tr><td><p></p></td></tr>
 Inline Styles: Always prefer inline CSS over embedded or external CSS.
 Tables for Layout: Use <table> for structure; avoid <div>.
 Fixed width: 620px or less for mobile compatibility.
 No Javascript: JS is blocked for all clients.
+enforce_header_footer_position = top_bottom
+
+| Component | Description |
+|-----------|-------------|
+| Header | Title of the email |
+| Greeting | {% if customer.firstName != blank %} Hi {{customer.firstName &#124; titlecase }}, {% else %} Hello partner, {% endif %} |
+| Main Content Block | Content, main messages, grey box, images, button. Content inside <tbody></tbody> |
+| CTA Button | Use table-based buttons (not <button>) |
+| Footer | Social links, Disclaimer, Help Centre, Terms and Conditions, Regulations and Unsubscribe |
 
 require_header = true
 header_template = "deriv-red-slash-header.html"
@@ -473,8 +484,6 @@ footer_template = "footer-partner.html"
     74  <!-- end message template -->
     75  </html>
 
-enforce_header_footer_position = top_bottom
-allowed_content_blocks = [ "body", "promotion", "unsubscribe", "legal"]
 
 require_greybox = true
 - when greybox is required, use these codes below starting from line 1 through 19. make sure no lines are missed
