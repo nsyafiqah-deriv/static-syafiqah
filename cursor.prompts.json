@@ -1,15 +1,15 @@
 {
-    "emailTemplate:usMarket": {
-      "description": "Generate a US-market version of the trading hours email template",
-      "prompt": "Generate a new HTML email using the layout and style of 'trading-hours-adjustment-eu-es.html'. Update the headline to 'Trading Schedule Notice – US Markets', switch times to EST, and change language to English."
+    "emailTemplate:derivRedSlashHeaderwithGreybox": {
+      "description": "Generate email template with red slash header and a greybox in the content section",
+      "prompt": "Hey, please help to create an HTML email template based on the existing files (deriv-red-slash-header.html and footer-partner.html). Create a complete HTML email template that combines the header and footer with a content section. Write this in email-template.html file. Add a greybox as well in the content section - follow the exact codes in deriv-red-slash-header.mdc"
     },
-    "emailTemplate:newLanguageVersion": {
-      "description": "Generate a translated copy of an existing email template",
-      "prompt": "Translate the HTML email in 'trading-hours-adjustment-eu-es.html' into French, keeping the layout and formatting the same. Only update text content."
+    "emailTemplate:derivRedSlashHeaderwithGreybox_addButton": {
+      "description": "Generate email template with red slash header and a greybox in the content section, together with a CTA button",
+      "prompt": "Hey, please help to create an HTML email template based on the existing files (deriv-red-slash-header.html and footer-partner.html). Create a complete HTML email template that combines the header and footer with a content section. Write this in email-template.html file. Add a greybox as well in the content section - follow the exact codes in deriv-red-slash-header.mdc and add CTA button under the greybox"
     },
-    "emailTemplate:weeklyEconomicCalendar": {
-      "description": "Generate a weekly economic calendar email template",
-      "prompt": "Generate a new HTML email using the layout and style of 'weeklyeconomicupdate_new.html'. Update the Economic events to the dates and times specified. As below: 31st March 2025, the day of the date economic events: <ul><li>china manufacturing</li><li>china services</li></ul> 1st April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 2nd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 3rd April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> 4th April 2025, the day of the date, economic events: <ul><li>usa non-farm payrolls</li><li>usa unemployment rate</li></ul> and update the Assets that may be affected as below; China 50 China H Shares Hong Kong 50 USDCNH Australia 200"
+    "emailTemplate:derivRedSlashHeaderwithGreybox_unorderedList": {
+      "description": "Generate email template with red slash header and a greybox in the content section, with unordered list in the greybox",
+      "prompt": "Hey, please help to create an HTML email template based on the existing files (deriv-red-slash-header.html and footer-partner.html). Create a complete HTML email template that combines the header and footer with a content section. Write this in email-template.html file. Add a greybox as well in the content section - follow the exact codes in deriv-red-slash-header.mdc and insert unordered list with 3 list items"
     },
   "emailTemplate:weeklyEconomicCalendar_forAnyLanguage": {
       "description": "Replace the data inside the table with the data from the screenshot",

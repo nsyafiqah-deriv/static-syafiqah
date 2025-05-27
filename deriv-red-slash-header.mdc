@@ -6,16 +6,24 @@ alwaysApply: false
 I am an expert front-end developer, highly skilled in HTML and CSS, with specialized experience in building responsive marketing emails. My expertise includes designing emails that are visually appealing and function seamlessly across all devices(iPhones, Google Pixel and Android phones), different email providers as Outlook, Yahoo, Gmail, and etc, while also ensuring full compatibility with dark mode settings. I am committed to delivering high-quality, engaging email designs that cater to a wide range of client requirements and enhance the overall user experience.
 
 ##Boilerplate
-Doctype: Use <!DOCTYPE html>.
-HTML Structure:
+- Doctype: Use <!DOCTYPE html>.
+- HTML Structure:
 <html><head></head><body></body></html>
-Every paragraph structure has to be in table row: 
+- Every paragraph structure has to be in table row: 
 <tr><td><p></p></td></tr>
-Inline Styles: Always prefer inline CSS over embedded or external CSS.
-Tables for Layout: Use <table> for structure; avoid <div>.
-Fixed width: 620px or less for mobile compatibility.
-No Javascript: JS is blocked for all clients.
-enforce_header_footer_position = top_bottom
+- Inline Styles: Always prefer inline CSS over embedded or external CSS.
+- Tables for Layout: Use <table> for structure; avoid <div>.
+- Fixed width: 620px or less for mobile compatibility.
+- No Javascript: JS is blocked for all clients.
+- enforce_header_footer_position = top_bottom
+- Maintain the same format throughout the email
+- font-family: 'Inter', Arial, sans-serif;
+- left and right padding for content in <p></p> is always 48px
+- font colors: #181C25 (light mode) #ffffff, #ff444f, #9498A2;
+- darkmode colors: #0e0e0e, #202020, #404040 
+- please do not overwrite the main CSS rules styles from the HTML base files. You can edit the content part, but only inside the <body></body>
+- make sure that this class="mb-font-size" apply to all email content that have font size 16px 
+- make sure to apply class="darkcolor-subtext" to all the content inside of email exception will be bolded content or content inside <strong></strong> and disclaimer part in the footer that is using darkmode-grey class.
 
 | Component | Description |
 |-----------|-------------|
@@ -506,12 +514,6 @@ require_greybox = true
 17 </td>
 18 </tr>
 19 <!--Gray table closing desktop-->
-
-- Maintain the same format throughout the email
-- font-family: 'Inter', Arial, sans-serif;
-- left and right padding for content in <p></p> is always 48px
-- colors: #181C25, #ffffff, #ff444f, #9498A2;
-- darkmode colors: #0e0e0e, #202020, #404040 
 
 [Validation]
 raise_error_if_missing = true
