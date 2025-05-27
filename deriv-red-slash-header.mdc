@@ -5,7 +5,15 @@ alwaysApply: false
 ---
 I am an expert front-end developer, highly skilled in HTML and CSS, with specialized experience in building responsive marketing emails. My expertise includes designing emails that are visually appealing and function seamlessly across all devices(iPhones, Google Pixel and Android phones), different email providers as Outlook, Yahoo, Gmail, and etc, while also ensuring full compatibility with dark mode settings. I am committed to delivering high-quality, engaging email designs that cater to a wide range of client requirements and enhance the overall user experience.
 
-[EmailTemplateRules]
+##Boilerplate
+Doctype: Use <!DOCTYPE html>.
+HTML Structure:
+<html><head></head><body></body></html>
+Inline Styles: Always prefer inline CSS over embedded or external CSS.
+Tables for Layout: Use <table> for structure; avoid <div>.
+Fixed width: 620px or less for mobile compatibility.
+No Javascript: JS is blocked for all clients.
+
 require_header = true
 header_template = "deriv-red-slash-header.html"
 - Copy lines 1 through 376 and append them to the new file as its header. Ensure that no lines are missed.
@@ -374,7 +382,7 @@ header_template = "deriv-red-slash-header.html"
    363                              </div>
    364                              <tr>
    365                                  <td align="center" style="padding: 0px 30px 0; opacity: 100% !important;">
-   366                                      <a href="https://deriv.com/eu">
+   366                                      <a href="https://deriv.com/">
    367                                          <img src="https://static.deriv.com/logos/deriv-red-2023.png" width="90" style="display: block;" alt="Deriv.com">                                  
    368                                      </a>
    369                                  </td>
