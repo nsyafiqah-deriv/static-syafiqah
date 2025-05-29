@@ -540,6 +540,42 @@ require_greybox = true
 18 </tr>
 19 <!--Gray table closing desktop-->
 
+require_redButton = true
+- when red button is required, use these codes below starting from line 1 through 15. make sure no lines are missed
+1  <!-- BUTTON -->
+     2  <tr>
+     3      <td align="center" class="darkmodeblack" style="padding: 10px 0px 30px;">
+     4          <!--[if (gte mso 9)|(IE)]>
+     5          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://app.deriv.com/appstore/traders-hub" style="height:40px;v-text-anchor:middle;width:230px;" arcsize="30%" strokecolor="#ff444f" fillcolor="#ff444f">
+     6          <w:anchorlock/>
+     7          <center style="color:#fff;font-family:sans-serif;font-size:14px;font-weight:bold;">Go to Trader’s Hub</center>
+     8          </v:roundrect>
+     9          <![endif]-->
+    10          <!--[if !gte mso 9]><!-- -->
+    11          <a class="button" href="https://app.deriv.com/appstore/traders-hub" target="_blank" style="text-decoration: none; text-align: center; line-height: 20px; padding: 10px 30px; display: inline-block; font-weight: bold; font-family: 'Inter', Arial, sans-serif; font-size: 14px; border-radius: 61px; overflow: visible; border: 0;color: #ffffff; background: #ff444f;">Go to Trader’s Hub</a>
+    12          <!--<![endif]-->
+    13      </td>
+    14  </tr>
+    15  <!-- BUTTON CLOSING -->
+
+    require_whiteButton = true
+    - when white button is required, use these codes below starting from line 1 through 15. make sure no lines are missed
+1  <!-- BUTTON -->
+     2  <tr>
+     3      <td align="center" class="darkmodeblack" style="padding: 10px 0px 30px;">
+     4          <!--[if (gte mso 9)|(IE)]>
+     5          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="https://app.deriv.com/appstore/traders-hub" style="height:40px;v-text-anchor:middle;width:230px;" arcsize="30%" strokecolor="#ff444f" fillcolor="#ff444f">
+     6          <w:anchorlock/>
+     7          <center style="color:#fff;font-family:sans-serif;font-size:14px;font-weight:bold;">Go to Trader’s Hub</center>
+     8          </v:roundrect>
+     9          <![endif]-->
+    10          <!--[if !gte mso 9]><!-- -->
+    11          <a class="button-secondary" href="https://app.deriv.com/appstore/traders-hub" target="_blank" style="text-decoration: none; text-align: center; line-height: 20px; padding: 10px 30px; display: inline-block; font-weight: bold; font-family: 'Inter', Arial, sans-serif; font-size: 14px; border-radius: 61px; overflow: visible; border: 0;color: #ffffff; background: #ff444f;">Go to Trader’s Hub</a>
+    12          <!--<![endif]-->
+    13      </td>
+    14  </tr>
+    15  <!-- BUTTON CLOSING -->
+
 [Validation]
 raise_error_if_missing = true
 error_message = "All email templates must include the standard Deriv header and footer as per design guidelines."
