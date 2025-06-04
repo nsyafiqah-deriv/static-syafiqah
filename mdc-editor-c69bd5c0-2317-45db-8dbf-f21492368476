@@ -1,0 +1,9 @@
+// Instructions for applying CSS classes:
+// 1. Apply class="mb-font-size" to all email content with font size 16px.
+// 2. Apply class="darkcolor-subtext" to all content inside the email.
+//    - Exception: Do not apply to bolded content or content inside <strong> tags.
+//    - Exception: Do not apply to the disclaimer part in the footer using the darkmode-grey class.
+// Example:
+// <p class="mb-font-size darkcolor-subtext">This is a sample text.</p>
+// <strong>This text should not have the darkcolor-subtext class.</strong>
+// <p class="darkmode-grey">This is a disclaimer in the footer.</p> 
