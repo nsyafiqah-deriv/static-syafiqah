@@ -383,11 +383,9 @@
                             <!-- END HERO -->
                             <tr>
                                 <td align="right" style="padding: 20px 48px 10px; background-color: #fff;" class="mobile-side darkmodeblack">
-                                    <p dir="rtl" style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #181C25; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">{% if customer.firstName != blank %}
-مرحبًا {{customer.firstName | titlecase }}،
-{% else %}
-مرحبًا بالمتداول،
-{% endif %}</p>
+                                    <p dir="rtl" style="font-family: 'Inter', Arial, sans-serif; font-size: 16px; line-height: 1.5 ; color: #181C25; font-weight: 400;margin:0;" class="darkcolor-subtext mb-font-size">
+مرحبًا [customer.name]،
+</p>
                                 </td>
                             </tr>
                             <tr>
