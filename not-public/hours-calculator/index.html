@@ -216,12 +216,12 @@
             const balanceMinutesLeft = requiredWeeklyMinutes - totalWeeklyMinutes;
             const balanceHoursLeft = Math.floor(balanceMinutesLeft / 60);
             const balanceMinutesRemaining = Math.abs(balanceMinutesLeft % 60);
-            const balanceSign = balanceMinutesLeft >= 0 ? '+' : '-';
+            const balanceSign = balanceMinutesLeft >= 0 ? '-' : '+';
             
             contentDiv.innerHTML = `
                 <p><strong>Total Weekly Working Hours:</strong> ${result.hours} hours and ${result.minutes} minutes</p>
                 <p><strong>Total Weekly Working Minutes:</strong> ${totalWeeklyMinutes} minutes</p>
-                <p><strong>Balance hours left for this week:</strong> <span style="color: ${balanceMinutesLeft < 0 ? 'red' : 'green'}; font-weight: bold;">${balanceSign}${Math.abs(balanceHoursLeft)} hours and ${balanceMinutesRemaining} minutes</span></p>
+                <p><strong>Balance hours left for this week:</strong> <span style="color: ${balanceMinutesLeft >= 0 ? 'red' : 'green'}; font-weight: bold;">${balanceSign}${Math.abs(balanceHoursLeft)} hours and ${balanceMinutesRemaining} minutes</span></p>
                 <p><em>Note: Negative balance (-) means you need to work more hours to reach 40h, positive balance (+) means you have surplus hours beyond 40h.</em></p>
                 ${entriesHtml}
             `;
