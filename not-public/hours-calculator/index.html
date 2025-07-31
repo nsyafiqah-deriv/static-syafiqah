@@ -210,13 +210,10 @@
             });
             entriesHtml += '</ul>';
             
-            // Calculate balance hours left for this week (40h - total weekly working hours)
-            const weeklyRequiredHours = 40;
-            const totalWeeklyMinutes = (result.hours * 60) + result.minutes;
-            const balanceMinutesLeft = (weeklyRequiredHours * 60) - totalWeeklyMinutes;
-            const balanceHoursLeft = Math.floor(balanceMinutesLeft / 60);
-            const balanceMinutesRemaining = Math.abs(balanceMinutesLeft % 60);
-            const balanceSign = balanceMinutesLeft >= 0 ? '+' : '-';
+            // Format the final balance
+            const balanceSign = result.balanceHours >= 0 ? '+' : '-';
+            const balanceHours = Math.abs(result.balanceHours);
+            const balanceMinutes = Math.abs(result.balanceMinutes);
             
             contentDiv.innerHTML = `
                 <p><strong>Total Weekly Working Hours:</strong> ${result.hours} hours and ${result.minutes} minutes</p>
