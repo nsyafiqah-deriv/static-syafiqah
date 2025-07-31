@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Hours Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .day-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 10px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        .day-entry label {
+            font-weight: bold;
+            color: #555;
+        }
+        input, select {
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .results {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #e8f5e8;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+        .remove-btn {
+            background-color: #dc3545;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+        .remove-btn:hover {
+            background-color: #c82333;
+        }
+        .add-day-btn {
+            background-color: #28a745;
+            margin-top: 10px;
+        }
+        .add-day-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Work Hours Calculator</h1>
+        
+        <div id="timesheet-form">
+            <div class="day-entry">
+                <label>Day</label>
+                <label>Start Time</label>
+                <label>End Time</label>
+                <label>Break (minutes)</label>
+                <label>Action</label>
+            </div>
+            <div id="day-entries">
+                <!-- Day entries will be added here -->
+            </div>
+            <button type="button" class="add-day-btn" onclick="addDayEntry()">Add Day</button>
+            <button type="button" onclick="calculateHours()">Calculate Weekly Hours</button>
+        </div>
+        
+        <div id="results" class="results" style="display: none;">
+            <h3>Results</h3>
+            <div id="results-content"></div>
+        </div>
+    </div>
+
+    <script src="work-hours-calculator.js"></script>
+    <script>
+        let dayCounter = 0;
+        const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+        function addDayEntry() {
+            const container = document.getElementById('day-entries');
+            const dayEntry = document.createElement('div');
+            dayEntry.className = 'day-entry';
+            dayEntry.id = `day-${dayCounter}`;
+            
+            const daySelect = document.createElement('select');
+            daysOfWeek.forEach(day => {
+                const option = document.createElement('option');
+                option.value = day;
+                option.textContent = day;
+                daySelect.appendChild(option);
+            });
+            
+            dayEntry.innerHTML = `
+                <select id="day-${dayCounter}-select">${daySelect.innerHTML}</select>
+                <input type="time" id="start-${dayCounter}" value="09:00">
+                <input type="time" id="end-${dayCounter}" value="17:00">
+                <input type="number" id="break-${dayCounter}" value="30" min="0" max="480" placeholder="Break minutes">
+                <button type="button" class="remove-btn" onclick="removeDayEntry(${dayCounter})">Remove</button>
+            `;
+            
+            container.appendChild(dayEntry);
+            dayCounter++;
+        }
+
+        function removeDayEntry(dayId) {
+            const element = document.getElementById(`day-${dayId}`);
+            if (element) {
+                element.remove();
+            }
+        }
+
+        function calculateHours() {
+            const entries = [];
+            const dayElements = document.querySelectorAll('.day-entry');
+            
+            dayElements.forEach((element, index) => {
+                if (element.id && element.id.startsWith('day-')) {
+                    const dayId = element.id.split('-')[1];
+                    const daySelect = document.getElementById(`day-${dayId}-select`);
+                    const startTime = document.getElementById(`start-${dayId}`).value;
+                    const endTime = document.getElementById(`end-${dayId}`).value;
+                    const breakMinutes = parseInt(document.getElementById(`break-${dayId}`).value) || 0;
+                    
+                    if (startTime && endTime) {
+                        entries.push({
+                            day: daySelect.value,
+                            startTime: startTime,
+                            endTime: endTime,
+                            breakMinutes: breakMinutes
+                        });
+                    }
+                }
+            });
+
+            if (entries.length === 0) {
+                alert('Please add at least one day entry');
+                return;
+            }
+
+            const result = calculateWeeklyHours(entries);
+            displayResults(result, entries);
+        }
+
+        function displayResults(result, entries) {
+            const resultsDiv = document.getElementById('results');
+            const contentDiv = document.getElementById('results-content');
+            
+            let entriesHtml = '<h4>Daily Breakdown:</h4><ul>';
+            let runningBalance = 0;
+            
+            entries.forEach((entry, index) => {
+                const startTime = new Date(`2000-01-01T${entry.startTime}`);
+                const endTime = new Date(`2000-01-01T${entry.endTime}`);
+                const totalMinutes = (endTime - startTime) / (1000 * 60) - entry.breakMinutes;
+                const hours = Math.floor(totalMinutes / 60);
+                const minutes = totalMinutes % 60;
+                
+                // Calculate daily balance vs 8-hour requirement
+                const dailyBalance = totalMinutes - (8 * 60); // 8 hours = 480 minutes
+                runningBalance += dailyBalance;
+                
+                const dailyBalanceHours = Math.floor(Math.abs(dailyBalance) / 60);
+                const dailyBalanceMinutes = Math.abs(dailyBalance) % 60;
+                const balanceSign = dailyBalance >= 0 ? '+' : '-';
+                const runningBalanceHours = Math.floor(Math.abs(runningBalance) / 60);
+                const runningBalanceMinutes = Math.abs(runningBalance) % 60;
+                const runningBalanceSign = runningBalance >= 0 ? '+' : '-';
+                
+                entriesHtml += `
+                    <li>
+                        <strong>${entry.day}:</strong> ${hours}h ${minutes}m (${entry.startTime} - ${entry.endTime}, ${entry.breakMinutes}m break)
+                        <br><em>Daily balance: ${balanceSign}${dailyBalanceHours}h ${dailyBalanceMinutes}m (vs 8h requirement)</em>
+                        <br><em>Running balance: ${runningBalanceSign}${runningBalanceHours}h ${runningBalanceMinutes}m</em>
+                    </li>
+                `;
+            });
+            entriesHtml += '</ul>';
+            
+            // Format the final balance
+            const balanceSign = result.balanceHours >= 0 ? '+' : '-';
+            const balanceHours = Math.abs(result.balanceHours);
+            const balanceMinutes = Math.abs(result.balanceMinutes);
+            
+            contentDiv.innerHTML = `
+                <p><strong>Total Weekly Working Hours:</strong> ${result.hours} hours and ${result.minutes} minutes</p>
+                <p><strong>Total Weekly Working Minutes:</strong> ${(result.hours * 60) + result.minutes} minutes</p>
+                <p><strong>Balance hours left for this week:</strong> <span style="color: ${result.balanceHours >= 0 ? 'green' : 'red'}; font-weight: bold;">${balanceSign}${balanceHours} hours and ${balanceMinutes} minutes</span></p>
+                <p><em>Note: Negative balance means you need to work more hours, positive balance means you have surplus hours.</em></p>
+                ${entriesHtml}
+            `;
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        // Add initial day entry when page loads
+        window.onload = function() {
+            addDayEntry();
+        };
+    </script>
+</body>
+</html> 

@@ -1,7 +1,10 @@
 function calculateWeeklyHours(dailyRecords) {
     let totalMinutes = 0;
+    let balanceMinutes = 0; // Track balance (negative = deficit, positive = surplus)
+    const REQUIRED_HOURS_PER_DAY = 8;
+    const REQUIRED_MINUTES_PER_DAY = REQUIRED_HOURS_PER_DAY * 60;
   
-    dailyRecords.forEach(day => {
+    dailyRecords.forEach((day, index) => {
       // Assuming day.startTime and day.endTime are Date objects or time strings like "HH:MM"
       // For simplicity, let's assume they are "HH:MM" strings
       const parseTime = (timeString) => {
@@ -19,16 +22,30 @@ function calculateWeeklyHours(dailyRecords) {
         dailyWorkingMinutes -= day.breakMinutes;
       }
   
+      // Calculate daily balance (how much over/under the 8-hour requirement)
+      const dailyBalance = dailyWorkingMinutes - REQUIRED_MINUTES_PER_DAY;
+      
+      // Add to running balance
+      balanceMinutes += dailyBalance;
+      
       totalMinutes += dailyWorkingMinutes;
     });
   
     // Convert total minutes to hours and remaining minutes
     const totalHours = Math.floor(totalMinutes / 60);
     const remainingMinutes = totalMinutes % 60;
+    
+    // Convert balance to hours and minutes
+    const balanceHours = Math.floor(balanceMinutes / 60);
+    const balanceRemainingMinutes = balanceMinutes % 60;
   
     return {
       hours: totalHours,
-      minutes: remainingMinutes
+      minutes: remainingMinutes,
+      balanceHours: balanceHours,
+      balanceMinutes: balanceRemainingMinutes,
+      totalBalanceMinutes: balanceMinutes,
+      requiredHoursPerDay: REQUIRED_HOURS_PER_DAY
     };
   }
   
@@ -44,3 +61,4 @@ function calculateWeeklyHours(dailyRecords) {
   
   const weeklyTotal = calculateWeeklyHours(weeklyTimesheet);
   console.log(`Total weekly working hours: ${weeklyTotal.hours} hours and ${weeklyTotal.minutes} minutes.`);
+  console.log(`Balance: ${weeklyTotal.balanceHours} hours and ${weeklyTotal.balanceMinutes} minutes.`);
