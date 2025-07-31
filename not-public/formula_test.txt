@@ -1,0 +1,19 @@
+Formula Test with Sample Data:
+
+Original Formula: =(J3/DAY(EOMONTH(I3,0)))*N3
+
+Sample Row:
+- I3 (Month): 01/01/2024 (January = 31 days)
+- J3 (Days): 31
+- N3 (Oil Factor): 100
+
+Calculation:
+- DAY(EOMONTH(01/01/2024,0)) = 31 (days in January)
+- J3/DAY(EOMONTH(I3,0)) = 31/31 = 1.0
+- Final result = 1.0 * 100 = 100
+
+This suggests:
+- If J3 = total days in month → Formula just returns N3
+- If J3 = operational days < total days → Formula scales down N3
+
+Question: What does your business logic require? 
