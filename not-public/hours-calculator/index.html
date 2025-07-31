@@ -210,16 +210,19 @@
             });
             entriesHtml += '</ul>';
             
-            // Format the final balance
-            const balanceSign = result.balanceHours >= 0 ? '+' : '-';
-            const balanceHours = Math.abs(result.balanceHours);
-            const balanceMinutes = Math.abs(result.balanceMinutes);
+            // Calculate balance using new formula: 40h - total weekly working hours
+            const totalWeeklyMinutes = (result.hours * 60) + result.minutes;
+            const requiredWeeklyMinutes = 40 * 60; // 40 hours = 2400 minutes
+            const balanceMinutesLeft = requiredWeeklyMinutes - totalWeeklyMinutes;
+            const balanceHoursLeft = Math.floor(balanceMinutesLeft / 60);
+            const balanceMinutesRemaining = Math.abs(balanceMinutesLeft % 60);
+            const balanceSign = balanceMinutesLeft >= 0 ? '+' : '-';
             
             contentDiv.innerHTML = `
                 <p><strong>Total Weekly Working Hours:</strong> ${result.hours} hours and ${result.minutes} minutes</p>
-                <p><strong>Total Weekly Working Minutes:</strong> ${(result.hours * 60) + result.minutes} minutes</p>
-                <p><strong>Balance hours left for this week:</strong> <span style="color: ${result.balanceHours >= 0 ? 'green' : 'red'}; font-weight: bold;">${balanceSign}${balanceHours} hours and ${balanceMinutes} minutes</span></p>
-                <p><em>Note: Negative balance means you need to work more hours, positive balance means you have surplus hours.</em></p>
+                <p><strong>Total Weekly Working Minutes:</strong> ${totalWeeklyMinutes} minutes</p>
+                <p><strong>Balance hours left for this week:</strong> <span style="color: ${balanceMinutesLeft >= 0 ? 'green' : 'red'}; font-weight: bold;">${balanceSign}${Math.abs(balanceHoursLeft)} hours and ${balanceMinutesRemaining} minutes</span></p>
+                <p><em>Note: Positive balance means you need to work more hours, negative balance means you have surplus hours.</em></p>
                 ${entriesHtml}
             `;
             
