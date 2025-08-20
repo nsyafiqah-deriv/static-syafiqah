@@ -18,5 +18,9 @@
   "emailTemplate:sameTemplate_differentContent": {
       "description": "Keeping the same template, update the content to be different",
       "prompt": "please copy the exact codes from high-leverage-trading-forex-email1.html to maintain the format and style and only change the content according to the image. for image links in the body content, please add placeholder if its not available"
+  },
+  "emailTemplate:footer_partner": {
+    "description": "Generate email template with red slash header and a screenshot content",
+    "prompt": "Hey, refer to [filename],please help to create an HTML email template based on the existing files (deriv-red-slash-header.html and footer-partner.html). Create a complete HTML email template that combines the header and footer with a content section. The content section should be exactly the same as the screenshot provided. Write this in email-template.html file. add CTA button using the button code in the deriv-red-slash-header-partner.mdc file"
   }
 }

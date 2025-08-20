@@ -524,6 +524,23 @@ require_greybox = true
 18 </tr>
 19 <!--Gray table closing desktop-->
 
+require_button = true
+- when button is required, use these codes below starting from line 1 through 13. make sure no lines are missed
+     1  <!-- BUTTON -->
+     2  <tr>
+     3      <td align="center" class="darkmodeblack" style="padding: 30px 0px 30px;">
+     4          <!--[if mso]>
+     5          <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" 
+     6          xmlns:w="urn:schemas-microsoft-com:office:word" href="https://contest.deriv.com/" style="height:40px v-text-anchor:middle;width:230px;" arcsize="30%" strokecolor="#ff444f" fillcolor="#ff444f"> <w:anchorlock/> 
+     7          <center style="color:#ffffff; font-family:'Inter', Arial, sans-serif; font-size:14px; font-weight:bold; letter-spacing: 0.5px;">button</center> </v:roundrect>
+     8          <![endif]--> <!--[if !mso]><!-- -->
+     9          <a class="button" href="https://contest.deriv.com/" style="background-color:#ff444f; color:#ffffff !important; display:inline-block; font-family:'Inter', Arial, sans-serif; font-size:16px; font-weight:bold; line-height:44px; text-align:center; text-decoration:none; border-radius: 61px; padding:0 30px; mso-padding-alt:0px; border:0;">button</a>
+    10          <!--<![endif]-->
+    11      </td>
+    12  </tr>
+    13  <!-- BUTTON CLOSING -->
+
+
 [Validation]
 raise_error_if_missing = true
 error_message = "All email templates must include the standard Deriv header and footer as per design guidelines."
